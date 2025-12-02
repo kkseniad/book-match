@@ -86,8 +86,7 @@ group :development do
   gem "haikunator"
   gem "pry-rails"
   gem "rails_db", "~> 2.5.0"
-  # Generates erd image. Need to install GraphViz to use
-  # gem "rails-erd"
+  gem "rails-erd"
   gem "rufo"
 end
 
