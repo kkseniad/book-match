@@ -12,6 +12,6 @@
 #  updated_at      :datetime         not null
 #
 class Book < ApplicationRecord
-  has_many  :user_book, class_name: "UserBook", foreign_key: "book_id", dependent: :destroy
+  has_many :user_book, class_name: "UserBook", foreign_key: "book_id", dependent: :destroy
   has_many :readers, through: :user_book, source: :reader
 end
