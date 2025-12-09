@@ -42,7 +42,7 @@ task({ sample_data: :environment }) do
       # Skip if already in library
       next if UserBook.exists?(reader_id: user.id, book_id: book.id)
       
-      UserBook.create!(
+      UserBook.create(
         reader_id: user.id,
         book_id: book.id
       )
