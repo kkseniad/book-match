@@ -19,7 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_211954) do
     t.string "author"
     t.string "genre"
     t.text "description"
-    t.integer "user_book_count"
+    t.integer "user_books_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -187,6 +187,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_211954) do
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
+    t.integer "books_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
