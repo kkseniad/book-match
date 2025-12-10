@@ -1,0 +1,242 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: #3d2817;
+  line-height: 1.6;
+  background: #faf8f5;
+}
+
+/* Header */
+header {
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #c17250;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #c17250;
+  border: 2px solid #c17250;
+}
+
+.btn-secondary:hover {
+  background: #fef5f0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #c17250 0%, #d4915e 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(193, 114, 80, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(193, 114, 80, 0.4);
+}
+
+/* Hero Section */
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #3d2817;
+}
+
+.hero-content .highlight {
+  color: #c17250;
+  position: relative;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  color: #6b5548;
+  margin-bottom: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+/* How It Works */
+.how-it-works {
+  background: white;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 2.5rem;
+  color: #3d2817;
+  margin-bottom: 3rem;
+}
+
+.steps {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #c17250 0%, #d4915e 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 4px 12px rgba(193, 114, 80, 0.3);
+}
+
+.step h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #3d2817;
+}
+
+.step p {
+  color: #6b5548;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* CTA Section */
+.cta {
+  background: linear-gradient(135deg, #c17250 0%, #d4915e 100%);
+  padding: 5rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.btn-white {
+  background: white;
+  color: #c17250;
+}
+
+.btn-white:hover {
+  background: #fef5f0;
+  transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+  background: #3d2817;
+  color: #e8d5c4;
+  padding: 2rem;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .book-display {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .how-it-works h2,
+  .cta h2 {
+    font-size: 1.75rem;
+  }
+}
