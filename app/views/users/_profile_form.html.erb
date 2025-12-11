@@ -1,0 +1,29 @@
+<%= form_with model: user do |form| %>
+  <%# TODO: handle errors and alerts %>
+  <div class="mb-3 text-start">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 text-start">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email_address, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 text-start">
+    <%= form.label :password, class: "form-label" %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 text-start">
+    <%= form.label :password_confirmation, class: "form-label" %>
+    <%= form.password_field :password_confirmation, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 text-start">
+    <%= form.label :bio, class: "form-label" %>
+    <%= form.textarea :bio, class: "form-control" %>
+  </div>
+
+  <%= form.submit "Update profile", class: "btn btn-warm-primary w-100 mb-3" %>
+<% end %>

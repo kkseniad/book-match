@@ -22,11 +22,16 @@ class UsersController < ApplicationController
 
 
   def edit
-    # TODO: edit user   
+    @user = User.where({ :id => params.fetch(:id) }).at(0)  
   end
 
   def update
-    # TODO: update user
+    @user = User.where({ :id => params.fetch(:id) }).at(0)
+    if @user.update(profile_params)
+      redirect_to(user_path(@user), notice: "Updated user profile")
+    else
+      render :edit, alert: "Something went wrong when saving"
+    end
   end
 
   def destroy
@@ -37,6 +42,10 @@ class UsersController < ApplicationController
 
   def registration_params
     params.expect(user: [ :email_address, :name, :password, :password_confirmation ])
+  end
+
+  def profile_params
+    params.expect(user: [ :name, :bio, :email_address, :password, :password_confirmation ])
   end
 
 end
