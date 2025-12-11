@@ -29,11 +29,10 @@
           <a class="nav-link dropdown-toggle user-dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <%= Current.user.name || "Account" %>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <%= link_to "Edit Profile", edit_user_path(Current.user.id), class: "dropdown-item" %>
-            <li><hr class="dropdown-divider"></li>
-            <%= link_to "Sign Out", session_path, class: "dropdown-item", data: { turbo_method: :delete } %>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Edit profile", edit_user_path(Current.user.id), class: "dropdown-item" %>
+            <%= link_to "Sign out", session_path, method: :delete, class: "dropdown-item", data: { turbo_method: :delete } %>
+          </div>
         </li>
       </ul>
     </div>
