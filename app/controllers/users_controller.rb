@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access(only: [:new, :create]) 
-  
+  allow_unauthenticated_access(only: [ :new, :create ])
+
   def show
     @user = User.where({ :id => params.fetch(:id) }).at(0)
   end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
 
   def edit
-    @user = User.where({ :id => params.fetch(:id) }).at(0)  
+    @user = User.where({ :id => params.fetch(:id) }).at(0)
   end
 
   def update
@@ -47,5 +47,4 @@ class UsersController < ApplicationController
   def profile_params
     params.expect(user: [ :name, :bio, :email_address, :password, :password_confirmation ])
   end
-
 end
