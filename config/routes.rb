@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   root to: "pages#landing"
+
+  resources :users do
+    get "library", to: "user_books#index"
+  end
   resources :user_books
   resources :books
   resource :session

@@ -1,34 +1,42 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
-
-<div class="d-flex justify-content-center align-items-center mt-5">
-  <div style="max-width: 350px; width: 100%;" class="text-center">
-    <%# TODO: link to landing page/logo %>
-    <%= link_to "BOOK MATCH", "", class: "text-decoration-none" %>
+<div class="auth-container">
+  <div class="auth-card text-center">
+    <%= link_to "BOOK MATCH", root_path, class: "logo-link" %>
+    
     <h1>Sign In</h1>
+    
     <%= form_with url: session_path do |form| %>
       <div class="mb-3 text-start">
-        <%= form.label :email %>
-        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "form-control" %>
+        <%= form.label :email, class: "form-label" %>
+        <%= form.email_field :email_address, 
+            required: true, 
+            autofocus: true, 
+            autocomplete: "username", 
+            placeholder: "Enter your email address", 
+            value: params[:email_address], 
+            class: "form-control" %>
       </div>
 
       <div class="mb-3 text-start">
-        <%= form.label :password %>
-        <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "form-control" %>
+        <%= form.label :password, class: "form-label" %>
+        <%= form.password_field :password, 
+            required: true, 
+            autocomplete: "current-password", 
+            placeholder: "Enter your password", 
+            maxlength: 72, 
+            class: "form-control" %>
       </div>
 
-      <div class="mb-3">
-        <%= form.submit "Sign in", class: "btn btn-secondary w-100" %>
-      </div>
-
+      <%= form.submit "Sign In", class: "btn btn-warm-primary w-100 mb-3" %>
     <% end %>
 
-    <div class="my-2">
-      <%= link_to "Forgot password?", new_password_path %>
+    <div class="my-3">
+      <%= link_to "Forgot password?", new_password_path, class: "auth-link" %>
     </div>
 
-    <div class="my-2">
-      Not a member? <%= link_to "Sign Up", "" %>
+    <div class="divider"></div>
+
+    <div class="auth-text">
+      Not a member? <%= link_to "Sign Up", new_user_path, class: "auth-link" %>
     </div>
   </div>
 </div>
