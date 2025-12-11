@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def landing
     if authenticated?
-      redirect_to user_library_path(Current)
+      redirect_to user_library_path(Current.user.id)
     else
       render :landing
     end
