@@ -3,8 +3,10 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
+#  bio             :text
 #  books_count     :integer          default(0), not null
 #  email_address   :string           not null
+#  name            :string
 #  password_digest :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

@@ -1,4 +1,11 @@
 class PagesController < ApplicationController
-  def main
+  allow_unauthenticated_access(only: :landing)
+
+  def landing
+    if authenticated?
+      redirect_to user_library_path(Current.user.id)
+    else
+      render :landing
+    end
   end
 end

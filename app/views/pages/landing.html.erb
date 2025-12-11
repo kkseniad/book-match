@@ -1,0 +1,73 @@
+<header>
+  <nav>
+    <div class="logo">Book Match</div>
+    <div class="nav-buttons">
+      <%= link_to "Log In", new_session_path, class: "btn btn-secondary" %>
+      <%= link_to "Sign Up", new_user_path, class: "btn btn-primary" %>
+    </div>
+  </nav>
+</header>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="col-lg-9 text-center">
+    <%= image_tag "reader-illustration.svg", alt: "Person reading a book", class: "img-fluid" %>
+  </div>
+  <div class="hero-content">
+    <h1>Discover your next favorite book from readers who <span class="highlight">share your taste</span></h1>
+    <p>Stop wasting time on books you won't like. Get personalized recommendations from people who've read the same books you love.</p>
+    <div class="hero-buttons">
+      <%= link_to "Get Strated Free", new_user_path, class: "btn btn-primary btn-large" %>
+      <%= link_to "How It Works", "#how-it-works", class: "btn btn-secondary btn-large" %>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works" id="how-it-works">
+  <h2>How Book Match Works</h2>
+  <div class="steps">
+      <div class="step">
+        <div class="step-icon">📖</div>
+        <h3>Add Your Books</h3>
+        <p>Tell us what you've read and loved. The more books you add, the better your recommendations.</p>
+      </div>
+              
+      <div class="step">
+        <div class="step-icon">🤝</div>
+        <h3>We Find Your Matches</h3>
+        <p>Our algorithm connects you with readers who share 8+ books with you. Similar taste = trustworthy recommendations.</p>
+      </div>
+              
+      <div class="step">
+        <div class="step-icon">✨</div>
+        <h3>Discover Great Books</h3>
+        <p>Get personalized recommendations from people who read like you. No more wasting time on disappointing books.</p>
+      </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <h2>Ready to find your next favorite book?</h2>
+  <p>Join Book Match and start discovering books you'll actually love.</p>
+  <%= link_to "Start Reading Better Books Today", new_user_path, class: "btn btn-white btn-large" %>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Book Match. Built with ❤️ for book lovers.</p>
+  <p class="mb-0 small">
+    <%# TODO: make it link_to %>
+    <%= link_to "People illustrations by Storyset", "https://storyset.com/people", class: "text-decoration-none", style: "color: #e8d5c4;" %>
+  </p>
+</footer>
+
+<script>
+  // Smooth scroll for "How It Works" link
+  document.querySelector('a[href="#how-it-works"]').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('#how-it-works').scrollIntoView({ 
+      behavior: 'smooth' 
+    });
+  });
+</script>
