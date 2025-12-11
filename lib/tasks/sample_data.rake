@@ -6,7 +6,7 @@ task({ sample_data: :environment }) do
   puts "Adding users..."
 
   # Add users
-  names = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy"]
+  names = [ "Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy" ]
 
   names.each do |n| 
     user = User.find_or_create_by(email_address: "#{n}@example.com") do |u|
@@ -20,7 +20,7 @@ task({ sample_data: :environment }) do
 
   puts "Adding books..."
 
-  50.times do 
+  50.times do
     title = Faker::Book.title
     author = Faker::Book.author
     genre = Faker::Book.genre
@@ -38,16 +38,13 @@ task({ sample_data: :environment }) do
   all_users.each do |user|
     num_books = rand(10..15)
     random_books = all_books.sample(num_books)
-    
     random_books.each do |book|
       # Skip if already in library
       next if UserBook.exists?(reader_id: user.id, book_id: book.id)
-      
       UserBook.create(
         reader_id: user.id,
         book_id: book.id
       )
-      
       puts "-- #{user.email_address} added '#{book.title}' --"
     end
   end
