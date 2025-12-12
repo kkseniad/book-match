@@ -21,11 +21,11 @@ class UserBooksController < ApplicationController
 
   # POST /user_books or /user_books.json
   def create
-    @user_book = UserBook.new(user_book_params)
+    @user_book = Current.user.user_books.build(user_book_params)
 
     respond_to do |format|
       if @user_book.save
-        format.html { redirect_to @user_book, notice: "User book was successfully created." }
+        format.html { redirect_to @user_book.book, notice: "User book was successfully created." }
         format.json { render :show, status: :created, location: @user_book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +65,6 @@ class UserBooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_book_params
-      params.expect(user_book: [ :reader_id, :book_id, :status, :rating ])
+      params.require(:user_book).permit(:book_id, :status, :rating)
     end
 end

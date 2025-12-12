@@ -1,0 +1,231 @@
+/* Library Page Styling */
+.page-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #3d2817;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.page-header p {
+  color: #6b5548;
+  font-size: 1.1rem;
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #c17250;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b5548;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* Add Book Section */
+.add-book-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.search-bar {
+  display: flex;
+  gap: 1rem;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #c17250;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.tab {
+  flex: 1;
+  padding: 1rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6b5548;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #ce957d 0%, #d4915e 100%);
+  color: white;
+}
+
+.tab:hover:not(.active) {
+  background: #fef5f0;
+}
+
+/* Books Grid */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.book-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.book-card-link:hover {
+  text-decoration: none;
+}
+
+/* Book Cards */
+.book-card-link .book-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(193, 114, 80, 0.2);
+}
+
+.book-cover {
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #c17250 0%, #d4915e 100%);
+}
+
+/* Variety of book cover colors (warm palette) */
+/* Variety of book cover colors */
+.book-card-link:nth-child(6n+1) .book-cover {
+  background: linear-gradient(135deg, #c17250 0%, #d4915e 100%); /* Your warm */
+}
+
+.book-card-link:nth-child(6n+2) .book-cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple */
+}
+
+.book-card-link:nth-child(6n+3) .book-cover {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); /* Teal */
+}
+
+.book-card-link:nth-child(6n+4) .book-cover {
+  background: linear-gradient(135deg, #e8b088 0%, #f5c99f 100%); /* Warm peach */
+}
+
+.book-card-link:nth-child(6n+5) .book-cover {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); /* Pink */
+}
+
+.book-card-link:nth-child(6n+6) .book-cover {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Blue */
+}
+
+.book-info {
+  padding: 1rem;
+}
+
+.book-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  color: #3d2817;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-author {
+  font-size: 0.85rem;
+  color: #6b5548;
+  margin-bottom: 0.75rem;
+}
+
+.book-rating {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.star {
+  color: #d4915e;
+  font-size: 0.9rem;
+}
+
+.star.empty {
+  color: #e8e8e8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  
+  .book-cover {
+    height: 200px;
+  }
+}
