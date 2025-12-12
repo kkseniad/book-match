@@ -1,3 +1,6 @@
+<% user_book = UserBook.where(:book_id => book.id, :reader_id => Current.user.id).at(0) %>
+
+
 <%= link_to book_path(book), class: "book-card-link" do %>
   <div class="book-card">
       <div class="book-cover">
@@ -7,11 +10,9 @@
         <div class="book-title"><%= book.title %></div>
         <div class="book-author"><%= book.author %></div>
         <div class="book-rating">
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
+          <% user_book.rating.times do %>
+            <span class="star">★</span>
+          <% end %>
         </div>
       </div>
   </div>

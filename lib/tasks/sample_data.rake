@@ -35,6 +35,7 @@ task({ sample_data: :environment }) do
   all_books = Book.all.to_a
   all_users = User.all
   STATUS = [ 'read', 'want_to_read' ]
+  RATE = [ 1, 2, 3, 4, 5]
 
   all_users.each do |user|
     num_books = rand(10..15)
@@ -45,7 +46,8 @@ task({ sample_data: :environment }) do
       UserBook.create(
         reader_id: user.id,
         book_id: book.id,
-        status: STATUS.sample
+        status: STATUS.sample,
+        rating: RATE.sample
       )
       puts "-- #{user.email_address} added '#{book.title}' --"
     end
