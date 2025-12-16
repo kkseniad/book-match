@@ -34,8 +34,8 @@ task({ sample_data: :environment }) do
   puts "Adding books to users' libraries..."
   all_books = Book.all.to_a
   all_users = User.all
-  STATUS = [ 'read', 'want_to_read' ]
-  RATE = [ 1, 2, 3, 4, 5]
+  STATUS = [ "read", "want_to_read" ]
+  RATE = [ 1, 2, 3, 4, 5 ]
 
   all_users.each do |user|
     num_books = rand(10..15)

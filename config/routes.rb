@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#landing"
 
   resources :users do
-    get 'library', to: 'library#index'
+    get "library", to: "library#index"
   end
   resources :user_books
   resources :books

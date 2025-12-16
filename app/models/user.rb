@@ -21,10 +21,9 @@ class User < ApplicationRecord
   has_many :user_books, class_name: "UserBook", foreign_key: "reader_id", dependent: :destroy
   has_many :books, through: :user_books, source: :book
 
-  has_many :read_user_books, -> { where(status: 'read') }, class_name: 'UserBook', foreign_key: "reader_id"
+  has_many :read_user_books, -> { where(status: "read") }, class_name: "UserBook", foreign_key: "reader_id"
   has_many :read_books, through: :read_user_books, source: :book
-  
-  has_many :want_to_read_user_books, -> { where(status: 'want_to_read') }, class_name: 'UserBook', foreign_key: "reader_id"
+  has_many :want_to_read_user_books, -> { where(status: "want_to_read") }, class_name: "UserBook", foreign_key: "reader_id"
   has_many :want_to_read_books, through: :want_to_read_user_books, source: :book
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
