@@ -26,5 +26,15 @@ class User < ApplicationRecord
   has_many :want_to_read_user_books, -> { where(status: "want_to_read") }, class_name: "UserBook", foreign_key: "reader_id"
   has_many :want_to_read_books, through: :want_to_read_user_books, source: :book
 
+  # Helper method to check if user has book
+  def has_book?(book)
+    user_books.exists?(book_id: book.id)
+  end
+  
+  # Get the status of a book if user has it
+  def book_status(book)
+    user_books.find_by(book_id: book.id)&.status
+  end
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 end
