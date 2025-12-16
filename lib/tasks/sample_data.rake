@@ -8,9 +8,10 @@ task({ sample_data: :environment }) do
   # Add users
   names = [ "Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy" ]
 
-  names.each do |name|
-    user = User.find_or_create_by(email_address: "#{name}@example.com") do |u|
+  names.each do |n|
+    user = User.find_or_create_by(email_address: "#{n}@example.com") do |u|
       puts "-- Adding user: #{u.email_address} --"
+      u.name = n
       u.password = "password"
     end
   end

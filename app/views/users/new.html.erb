@@ -1,0 +1,13 @@
+<div class="auth-container">
+  <div class="auth-card text-center">
+    <%= link_to "BOOK MATCH", root_path, class: "logo-link" %>
+    <h1>Sign Up</h1>
+    <%= render "registration_form", user: @user %>
+
+    <div class="divider"></div>
+
+    <div class="auth-text">
+      Already have an account? <%= link_to "Sign In", new_session_path, class: "auth-link" %>
+    </div>
+  </div>
+</div>
