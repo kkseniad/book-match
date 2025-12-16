@@ -176,22 +176,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_11_164359) do
   end
 
   create_table "user_books", force: :cascade do |t|
-    t.integer "reader_id"
-    t.integer "book_id"
+    t.bigint "reader_id", null: false
+    t.bigint "book_id", null: false
     t.string "status"
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_user_books_on_book_id"
+    t.index ["reader_id", "book_id"], name: "index_user_books_on_reader_id_and_book_id", unique: true
+    t.index ["reader_id"], name: "index_user_books_on_reader_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
     t.integer "books_count", default: 0, null: false
-    t.string "name"
-    t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.text "bio"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
@@ -202,4 +205,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_11_164359) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "user_books", "books"
+  add_foreign_key "user_books", "users", column: "reader_id"
 end
