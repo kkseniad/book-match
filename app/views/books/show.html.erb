@@ -2,33 +2,45 @@
 
 <%= render @book %>
 
-<%# TODO: bug adding same books %>
-<div>
-  <%= form_with model: @user_book, url: user_books_path, method: :post do |form| %>
-    <%= form.hidden_field :book_id, value: @book.id %>
-    <%= form.hidden_field :status, value: 'read' %>
-    <%# TODO: rating doesn't change %>
-    <div class="rating-group">
-      <%= form.label :rating, "Rate this book" %>
-      <%= form.select :rating, 
-          options_for_select([
-            ['No rating', nil],
-            ['⭐ 1 star', 1],
-            ['⭐⭐ 2 stars', 2],
-            ['⭐⭐⭐ 3 stars', 3],
-            ['⭐⭐⭐⭐ 4 stars', 4],
-            ['⭐⭐⭐⭐⭐ 5 stars', 5]
-          ]), 
-          {}, 
-          class: "form-select" %>
+<div class="book-actions">
+  <!-- Status Buttons -->
+  <div class="status-buttons">
+    <%= form_with(model: @user_book, url: @user_book.persisted? ? user_book_path(@user_book) : user_books_path, method: @user_book.persisted? ? :patch : :post) do |form| %>
+      <%= form.hidden_field :book_id, value: @book.id %>
+      <%= form.hidden_field :status, value: 'read' %>
+      <%= form.submit "I've Read", class: "btn btn-warm-primary #{'active' if @user_book.status == 'read'}" %>
+    <% end %>
+
+    <%= form_with(model: @user_book, url: @user_book.persisted? ? user_book_path(@user_book) : user_books_path, method: @user_book.persisted? ? :patch : :post) do |form| %>
+      <%= form.hidden_field :book_id, value: @book.id %>
+      <%= form.hidden_field :status, value: 'want_to_read' %>
+      <%= form.submit "Want to Read", class: "btn btn-warm-secondary #{'active' if @user_book.status == 'want_to_read'}" %>
+    <% end %>
+  </div>
+
+  <% if @user_book.persisted? %>
+    <div class="rating-section">
+      <%= form_with(model: @user_book, url: user_book_path(@user_book), method: :patch) do |form| %>
+        <%= form.hidden_field :book_id, value: @book.id %>
+        <%= form.hidden_field :status, value: @user_book.status %>
+          
+        <div class="rating-group">
+          <%= form.label :rating, "Rate this book" %>
+          <%= form.select :rating, 
+              options_for_select([
+                ['No rating', nil],
+                ['⭐ 1 star', 1],
+                ['⭐⭐ 2 stars', 2],
+                ['⭐⭐⭐ 3 stars', 3],
+                ['⭐⭐⭐⭐ 4 stars', 4],
+                ['⭐⭐⭐⭐⭐ 5 stars', 5]
+              ], @user_book.rating),
+              {},
+              class: "form-select" %>
+        </div>
+
+        <%= form.submit "Rate", class: "btn btn-sm" %>
+      <% end %>
     </div>
-
-    <%= form.submit "I've Read", class: "btn btn-warm-primary" %>
-  <% end %>
-
-  <%= form_with model: @user_book, url: user_books_path, method: :post do |form| %>
-    <%= form.hidden_field :book_id, value: @book.id %>
-    <%= form.hidden_field :status, value: 'want_to_read' %>
-    <%= form.submit "Want to Read", class: "btn btn-warm-primary" %>
   <% end %>
 </div>

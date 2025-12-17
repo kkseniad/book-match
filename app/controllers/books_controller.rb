@@ -8,7 +8,7 @@ class BooksController < ApplicationController
 
   # GET /books/1 or /books/1.json
   def show
-    @user_book = UserBook.find_or_create_by(book_id: @book.id, reader_id: Current.user.id)
+    @user_book = Current.user.user_books.find_or_initialize_by(book_id: @book.id)
   end
 
   # GET /books/new

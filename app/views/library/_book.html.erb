@@ -10,10 +10,11 @@
         <div class="book-title"><%= book.title %></div>
         <div class="book-author"><%= book.author %></div>
         <div class="book-rating">
-          <%# TODO: Rating doesn't work%>
-          <%# <% user_book.rating.times do %>
-          <%#   <span class="star">★</span>
-          <%# <% end %>
+          <% if user_book.rating? %>
+            <% user_book.rating.times do %>
+              <span class="star">★</span>
+            <% end %>
+          <% end %>
         </div>
       </div>
   </div>
