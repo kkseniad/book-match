@@ -24,7 +24,12 @@ class UserBooksController < ApplicationController
     book = Book.find(user_book_params[:book_id])
 
     @user_book = Current.user.user_books.find_or_initialize_by(book_id: book.id)
-    @user_book.assign_attributes(user_book_params)
+
+    if @user_book.new_record?
+      @user_book.assign_attributes(user_book_params)
+    else
+      @user_book.update(user_book_params)
+    end
 
     respond_to do |format|
       if @user_book.save
