@@ -2,9 +2,33 @@
 
 <%= render @book %>
 
+<%# TODO: bug adding same books %>
 <div>
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
-  <%= link_to "Back to books", books_path %>
+  <%= form_with model: @user_book, url: user_books_path, method: :post do |form| %>
+    <%= form.hidden_field :book_id, value: @book.id %>
+    <%= form.hidden_field :status, value: 'read' %>
+    <%# TODO: rating doesn't change %>
+    <div class="rating-group">
+      <%= form.label :rating, "Rate this book" %>
+      <%= form.select :rating, 
+          options_for_select([
+            ['No rating', nil],
+            ['⭐ 1 star', 1],
+            ['⭐⭐ 2 stars', 2],
+            ['⭐⭐⭐ 3 stars', 3],
+            ['⭐⭐⭐⭐ 4 stars', 4],
+            ['⭐⭐⭐⭐⭐ 5 stars', 5]
+          ]), 
+          {}, 
+          class: "form-select" %>
+    </div>
 
-  <%= button_to "Destroy this book", @book, method: :delete %>
+    <%= form.submit "I've Read", class: "btn btn-warm-primary" %>
+  <% end %>
+
+  <%= form_with model: @user_book, url: user_books_path, method: :post do |form| %>
+    <%= form.hidden_field :book_id, value: @book.id %>
+    <%= form.hidden_field :status, value: 'want_to_read' %>
+    <%= form.submit "Want to Read", class: "btn btn-warm-primary" %>
+  <% end %>
 </div>

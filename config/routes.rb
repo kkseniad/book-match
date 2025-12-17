@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  get "library/index"
   root to: "pages#landing"
 
   resources :users do
-    get "library", to: "user_books#index"
+    get "library", to: "library#index"
   end
   resources :user_books
   resources :books
