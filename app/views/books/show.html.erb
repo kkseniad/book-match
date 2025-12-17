@@ -1,46 +1,93 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @book %>
-
-<div class="book-actions">
-  <!-- Status Buttons -->
-  <div class="status-buttons">
-    <%= form_with(model: @user_book, url: @user_book.persisted? ? user_book_path(@user_book) : user_books_path, method: @user_book.persisted? ? :patch : :post) do |form| %>
-      <%= form.hidden_field :book_id, value: @book.id %>
-      <%= form.hidden_field :status, value: 'read' %>
-      <%= form.submit "I've Read", class: "btn btn-warm-primary #{'active' if @user_book.status == 'read'}" %>
-    <% end %>
-
-    <%= form_with(model: @user_book, url: @user_book.persisted? ? user_book_path(@user_book) : user_books_path, method: @user_book.persisted? ? :patch : :post) do |form| %>
-      <%= form.hidden_field :book_id, value: @book.id %>
-      <%= form.hidden_field :status, value: 'want_to_read' %>
-      <%= form.submit "Want to Read", class: "btn btn-warm-secondary #{'active' if @user_book.status == 'want_to_read'}" %>
-    <% end %>
+<% if notice.present? %>
+  <div class="alert alert-success" style="max-width: 1000px; margin: 0 auto 1rem;">
+    <%= notice %>
   </div>
+<% end %>
 
-  <% if @user_book.persisted? %>
-    <div class="rating-section">
-      <%= form_with(model: @user_book, url: user_book_path(@user_book), method: :patch) do |form| %>
-        <%= form.hidden_field :book_id, value: @book.id %>
-        <%= form.hidden_field :status, value: @user_book.status %>
-          
-        <div class="rating-group">
-          <%= form.label :rating, "Rate this book" %>
-          <%= form.select :rating, 
-              options_for_select([
-                ['No rating', nil],
-                ['⭐ 1 star', 1],
-                ['⭐⭐ 2 stars', 2],
-                ['⭐⭐⭐ 3 stars', 3],
-                ['⭐⭐⭐⭐ 4 stars', 4],
-                ['⭐⭐⭐⭐⭐ 5 stars', 5]
-              ], @user_book.rating),
-              {},
-              class: "form-select" %>
+<div class="book-detail-card">
+  <div class="book-detail-content">
+    <!-- Left: Book Cover & Actions -->
+    <div class="book-cover-section">
+      <div class="book-cover-large">
+        <%= @book.title.upcase %>
+      </div>
+      
+      <div class="action-buttons">
+        <%= form_with(model: @user_book, url: @user_book.persisted? ? user_book_path(@user_book) : user_books_path, method: @user_book.persisted? ? :patch : :post) do |form| %>
+          <%= form.hidden_field :book_id, value: @book.id %>
+          <%= form.hidden_field :status, value: 'read' %>
+          <%= form.submit "I've Read", class: "btn-status #{'active' if @user_book.status == 'read'}" %>
+        <% end %>
+
+        <%= form_with(model: @user_book, url: @user_book.persisted? ? user_book_path(@user_book) : user_books_path, method: @user_book.persisted? ? :patch : :post) do |form| %>
+          <%= form.hidden_field :book_id, value: @book.id %>
+          <%= form.hidden_field :status, value: 'want_to_read' %>
+          <%= form.submit "Want to Read", class: "btn-status #{'active' if @user_book.status == 'want_to_read'}" %>
+        <% end %>
+      </div>
+    </div>
+    
+    <!-- Right: Book Info -->
+    <div class="book-info-section">
+      <div class="book-header">
+        <% if @user_book.persisted? %>
+          <div class="status-badge">
+            📚 In Your Library
+          </div>
+        <% end %>
+        <h1 class="book-title"><%= @book.title %></h1>
+        <p class="book-author">by <%= @book.author %></p>
+        <% if @book.genre.present? %>
+          <span class="book-genre"><%= @book.genre %></span>
+        <% end %>
+      </div>
+      
+      <% if @book.description.present? %>
+        <div class="book-description">
+          <strong>About this book:</strong><br>
+          <%= @book.description %>
         </div>
-
-        <%= form.submit "Rate", class: "btn btn-sm" %>
+      <% end %>
+      
+      <!-- Rating Section -->
+      <% if @user_book.persisted? && @user_book.status == 'read' %>
+        <div class="rating-section">
+          <h3>Your Rating</h3>
+          
+          <% if @user_book.rating.present? %>
+            <div class="rating-display">
+              <% @user_book.rating.times do %>
+                <span class="star">★</span>
+              <% end %>
+              <% (5 - @user_book.rating).times do %>
+                <span class="star empty">★</span>
+              <% end %>
+              <span style="margin-left: 0.5rem; color: var(--text-medium);"><%= @user_book.rating %> stars</span>
+            </div>
+          <% end %>
+          
+          <%= form_with(model: @user_book, url: user_book_path(@user_book), method: :patch, class: "rating-form") do |form| %>
+            <%= form.hidden_field :book_id, value: @book.id %>
+            <%= form.hidden_field :status, value: @user_book.status %>
+            
+            <div class="form-group">
+              <%= form.label :rating, "Update your rating" %>
+              <%= form.select :rating, 
+                  options_for_select([
+                    ['No rating', nil],
+                    ['⭐ 1 star', 1],
+                    ['⭐⭐ 2 stars', 2],
+                    ['⭐⭐⭐ 3 stars', 3],
+                    ['⭐⭐⭐⭐ 4 stars', 4],
+                    ['⭐⭐⭐⭐⭐ 5 stars', 5]
+                  ], @user_book.rating),
+                  {},
+                  class: "form-select" %>
+            </div>
+            <%= form.submit "Update", class: "btn-rate" %>
+          <% end %>
+        </div>
       <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
