@@ -4,5 +4,6 @@ class LibraryController < ApplicationController
     @user = Current.user
     @read_books = @user.read_books.includes(:user_books)
     @want_to_read_books = @user.want_to_read_books.includes(:user_books)
+    @readers = @user.similar_readers.count
   end
 end
