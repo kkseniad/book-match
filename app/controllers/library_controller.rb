@@ -1,6 +1,5 @@
 class LibraryController < ApplicationController
   before_action :require_authentication
-  
   def index
     @user = Current.user
     @read_books = @user.read_books.includes(:user_books)
