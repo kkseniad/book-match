@@ -5,7 +5,6 @@ task({ sample_data: :environment }) do
 
   puts "Adding users..."
 
-  # Add users
   names = [ "Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy" ]
 
   names.each do |n|
@@ -13,21 +12,6 @@ task({ sample_data: :environment }) do
       puts "-- Adding user: #{u.email_address} --"
       u.name = n
       u.password = "password"
-    end
-  end
-
-  # Add books
-
-  puts "Adding books..."
-
-  50.times do
-    title = Faker::Book.title
-    author = Faker::Book.author
-    genre = Faker::Book.genre
-
-    book = Book.find_or_create_by(title: title, author: author) do |b|
-      puts "-- Adding book: #{b.title} by #{b.author} --"
-      b.genre = genre
     end
   end
 
@@ -55,7 +39,6 @@ task({ sample_data: :environment }) do
 
   puts "Sample data created successfully!"
   puts "Users: #{User.count}"
-  puts "Books: #{Book.count}"
   puts "UserBooks: #{UserBook.count}"
 
 end
