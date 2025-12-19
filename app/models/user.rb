@@ -31,4 +31,33 @@ class User < ApplicationRecord
   def has_book?(book)
     user_books.exists?(book_id: book.id)
   end
+
+  # Helper method to check if user has book
+  def has_book?(book)
+    user_books.exists?(book_id: book.id)
+  end
+
+  # Helper method to find overlaping books
+  def matching_books(other_user)
+    books
+      .where(id: other_user.books.select(:id))
+  end
+
+  # Helper method to find readers with overlaping books
+  def similar_readers
+    User
+      .joins(:books)
+      .where(books: { id: books.select(:id) })
+      .where.not(id: id)
+      .distinct
+  end
+
+  # Helper method to retrieve books from similar readers libraries
+  def recommended_books
+    Book
+      .joins(:readers)
+      .where(readers: { id: similar_readers })
+      .where.not(id: books)
+      .distinct
+  end
 end
