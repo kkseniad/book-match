@@ -1,7 +1,7 @@
 <div class="page-header">
   <h1>My Library</h1>
   <p>Track what you've read and discover your next favorite book</p>
-            
+
   <div class="stats">
     <div class="stat">
       <div class="stat-number" id="readCount"><%= @read_books.size %></div>
@@ -23,22 +23,7 @@
 <!-- Book Search -->
 <%= render "shared/search"%>
 
-<!-- Tabs -->
-<div class="tabs">
-  <button class="tab active" onclick="switchTab('read')">I've Read</button>
-  <button class="tab" onclick="switchTab('want')">Want to Read</button>
-</div>
-
-<!-- Read Books Grid -->
-<div id="readBooks" class="books-grid">
-  <% @read_books.each do |b| %>
-    <%= render "library/book", book: b %>
-  <% end %>
-</div>
-
-<!-- Want to Read Books Grid (Hidden by default) -->
-<div id="wantBooks" class="books-grid" style="display: none;">
-  <% @want_to_read_books.each do |b| %>
-    <%= render "library/book", book: b %>
-  <% end %>
-</div>
+<%= render "library/shelves",
+           user: @user,
+           read_books: @read_books,
+           want_to_read_books: @want_to_read_books %>

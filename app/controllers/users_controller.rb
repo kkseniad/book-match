@@ -3,6 +3,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.where({ :id => params.fetch(:id) }).at(0)
+    @read_books = @user.read_books.includes(:user_books)
+    @readers = @user.similar_readers.count
+    @want_to_read_books = @user.want_to_read_books.includes(:user_books)
+    @matching_books = @user.matching_books(Current.user)
   end
 
   def new
