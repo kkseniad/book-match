@@ -14,7 +14,6 @@
     </div>
 
     <div class="stat">
-      <%# TODO: count of user like you%>
       <div class="stat-number"><%= @readers %></div>
       <div class="stat-label">Readers Like You</div>
     </div>
@@ -22,12 +21,7 @@
 </div>
 
 <!-- Book Search -->
-<%# TODO: Add filters and buttons %>
-<div class="add-book-section">
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search for a book (title or author)...">
-  </div>
-</div>
+<%= render "shared/search"%>
 
 <!-- Tabs -->
 <div class="tabs">
@@ -48,22 +42,3 @@
     <%= render "library/book", book: b %>
   <% end %>
 </div>
-
-<script>
-  function switchTab(tab) {
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
-            
-    const readBooks = document.getElementById('readBooks');
-    const wantBooks = document.getElementById('wantBooks');
-            
-    if (tab === 'read') {
-      readBooks.style.display = 'grid';
-      wantBooks.style.display = 'none';
-    } else {
-        readBooks.style.display = 'none';
-        wantBooks.style.display = 'grid';
-        }
-  }
-</script>
