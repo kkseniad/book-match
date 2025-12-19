@@ -1,0 +1,69 @@
+/* Discover Page */
+
+/* Recommendation Badge */
+.recommendation-badge {
+  background: var(--warm-light);
+  color: var(--warm-primary);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+/* Genre Tag */
+.genre-tag {
+  background: var(--warm-light);
+  color: var(--warm-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.empty-state p {
+  color: var(--text-medium);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .discover-tabs {
+    flex-direction: column;
+  }
+  
+  .discover-tab {
+    justify-content: flex-start;
+  }
+  
+  .genre-filters {
+    justify-content: center;
+  }
+}
