@@ -4,12 +4,12 @@
             
   <div class="stats">
     <div class="stat">
-      <div class="stat-number" id="readCount"><%= Current.user.read_books.count %></div>
+      <div class="stat-number" id="readCount"><%= @read_books.size %></div>
       <div class="stat-label">Books Read</div>
     </div>
 
     <div class="stat">
-      <div class="stat-number" id="wantCount"><%= Current.user.want_to_read_books.count %></div>
+      <div class="stat-number" id="wantCount"><%= @want_to_read_books.size %></div>
       <div class="stat-label">Want to Read</div>
     </div>
 

@@ -21,7 +21,15 @@ class UserBooksController < ApplicationController
 
   # POST /user_books or /user_books.json
   def create
-    @user_book = Current.user.user_books.build(user_book_params)
+    book = Book.find(user_book_params[:book_id])
+
+    @user_book = Current.user.user_books.find_or_initialize_by(book_id: book.id)
+
+    if @user_book.new_record?
+      @user_book.assign_attributes(user_book_params)
+    else
+      @user_book.update(user_book_params)
+    end
 
     respond_to do |format|
       if @user_book.save
@@ -38,7 +46,7 @@ class UserBooksController < ApplicationController
   def update
     respond_to do |format|
       if @user_book.update(user_book_params)
-        format.html { redirect_to @user_book, notice: "User book was successfully updated." }
+        format.html { redirect_to user_library_path(Current.user.id), notice: "User book was successfully updated." }
         format.json { render :show, status: :ok, location: @user_book }
       else
         format.html { render :edit, status: :unprocessable_entity }
