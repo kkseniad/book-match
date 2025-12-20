@@ -18,6 +18,21 @@
 }
 
 /* Reader Card */
+.reader-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.reader-card-link:hover {
+  text-decoration: none;
+}
+
+.reader-card-link:hover .reader-card {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
 .reader-card {
   background: white;
   border-radius: 12px;
@@ -119,12 +134,6 @@
   text-decoration: none;
   transition: all 0.2s;
   border: 1px solid #e8e8e8;
-}
-
-.book-tag:hover {
-  background: var(--warm-light);
-  color: var(--warm-primary);
-  border-color: var(--warm-primary);
 }
 
 .book-tag.more {
