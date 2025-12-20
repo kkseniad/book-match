@@ -18,9 +18,9 @@ class UsersController < ApplicationController
 
     if @user.save
       start_new_session_for(@user)
-      redirect_to user_path(@user), notice: "Successfully created a new account"
+      redirect_to user_library_path(@user), notice: "Successfully created a new account"
     else
-      render :new, alert: "Unable to create a user"
+      render :new, status: :unprocessable_entity
     end
   end
 
