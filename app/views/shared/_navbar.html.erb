@@ -24,6 +24,7 @@
             <%= Current.user.name || "Account" %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Go to your profile", user_path(Current.user.id), class: "dropdown-item" %>
             <%= link_to "Edit profile", edit_user_path(Current.user.id), class: "dropdown-item" %>
             <%= link_to "Sign out", session_path, method: :delete, class: "dropdown-item", data: { turbo_method: :delete } %>
           </div>
