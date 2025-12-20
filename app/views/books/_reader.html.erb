@@ -1,0 +1,47 @@
+<% user_book = UserBook.find_by(reader_id: user.id, book_id: book.id) %>
+<% matching_books = user.matching_books(Current.user) %>
+<% has_matches = matching_books.count > 0 %>
+
+<div class="reader-card <%= 'has-matches' if has_matches %>">
+  <div class="reader-header">
+    <div class="reader-info">
+      <h5 class="reader-name"><%= user.name %></h5>
+      <% if has_matches %>
+        <span class="match-badge">
+          🤝 <%= matching_books.count %> books in common
+        </span>
+      <% else %>
+        <span class="match-badge">
+           ☹️ No books in common
+        </span>
+      <% end %>
+    </div>
+    
+    <% if user_book.rating? %>
+      <div class="reader-rating">
+        <div class="stars-display">
+          <% user_book.rating.times do %>
+            <span class="star">★</span>
+          <% end %>
+          <% (5 - user_book.rating).times do %>
+            <span class="star empty">★</span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if has_matches %>
+    <div class="shared-books">
+      <p class="shared-books-label">Books you both read:</p>
+      <div class="books-tags">
+        <% matching_books.limit(5).each do |shared_book| %>
+          <%= link_to shared_book.title, book_path(shared_book), class: "book-tag" %>
+        <% end %>
+        <% if matching_books.count > 5 %>
+          <span class="book-tag more">+<%= matching_books.count - 5 %> more</span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

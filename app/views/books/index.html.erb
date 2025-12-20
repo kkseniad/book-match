@@ -2,15 +2,73 @@
 
 <% content_for :title, "Books" %>
 
-<h1>Books</h1>
+<div class="page-header">
+  <h1>Discover Books</h1>
+  <p>Find your next favorite read</p>
+</div>
 
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
+<!-- Book Search -->
+<%= render "shared/search"%>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab active" data-tab="for-you">
+    For You
+  </button>
+  <button class="tab" data-tab="all-books">
+    All Books
+  </button>
+</div>
+
+<!-- Tab Content: For You -->
+<div class="tab-content active" data-content="for-you">
+  <% if @recommended_books.any? %>
+    <div class="books-grid">
+      <% @recommended_books.each do |book| %>
+        <%= link_to book_path(book), class: "book-card-link" do %>
+          <div class="book-card">
+            <div class="book-cover">
+              <%= book.title.upcase %>
+            </div>
+            <div class="book-info">
+              <div class="book-title"><%= book.title %></div>
+              <div class="book-author"><%= book.author %></div>
+              <% if book.genre.present? %>
+                <span class="genre-tag"><%= book.genre %></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <div class="empty-state-icon">📚</div>
+      <h3>No Recommendations Yet</h3>
+      <p>Add at least 5 books to your library to get personalized recommendations from readers with similar taste.</p>
+      <%= link_to "Go to My Library", user_library_path(Current.user), class: "btn btn-warm-primary" %>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New book", new_book_path %>
+<!-- Tab Content: All Books -->
+<div class="tab-content" data-content="all-books">
+  <div class="books-grid">
+    <% @books.each do |book| %>
+      <%= link_to book_path(book), class: "book-card-link" do %>
+        <div class="book-card">
+          <div class="book-cover">
+            <%= book.title.upcase %>
+          </div>
+          <div class="book-info">
+            <div class="book-title"><%= book.title %></div>
+            <div class="book-author"><%= book.author %></div>
+            <% if book.genre.present? %>
+              <span class="genre-tag"><%= book.genre %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

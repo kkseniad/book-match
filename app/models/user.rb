@@ -32,11 +32,6 @@ class User < ApplicationRecord
     user_books.exists?(book_id: book.id)
   end
 
-  # Helper method to check if user has book
-  def has_book?(book)
-    user_books.exists?(book_id: book.id)
-  end
-
   # Helper method to find overlaping books
   def matching_books(other_user)
     books

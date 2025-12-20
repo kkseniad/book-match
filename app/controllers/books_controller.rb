@@ -4,6 +4,13 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     @books = Book.all
+
+    if Current.user.books.count >= 5
+      similar_readers = Current.user.similar_readers
+      @recommended_books = Current.user.recommended_books
+    else
+      @recommended_books = []
+    end
   end
 
   # GET /books/1 or /books/1.json
@@ -59,13 +66,14 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def book_params
-      params.expect(book: [ :title, :author, :genre, :description, :user_book_count ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def book_params
+    params.expect(book: [ :title, :author, :genre, :description, :user_book_count ])
+  end
 end

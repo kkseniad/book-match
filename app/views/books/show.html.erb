@@ -91,3 +91,15 @@
     </div>
   </div>
 </div>
+<%# TODO: Check empty ratings %>
+<% if @book.readers.any? %>
+  <div class="similar-readers-section">
+    <h2 class="section-title">What Readers Think</h2>
+    <%# TODO: Make it link to users libraries %>
+    <div class="readers-grid">
+      <% @book.readers.where.not(id: Current.user.id).each do |reader| %>
+        <%= render "reader", user: reader, book: @book %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
