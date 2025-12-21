@@ -1,16 +1,10 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_book, only: %i[ show ]
 
   # GET /books or /books.json
   def index
-    @books = Book.all
-
-    if Current.user.books.count >= 5
-      similar_readers = Current.user.similar_readers
-      @recommended_books = Current.user.recommended_books
-    else
-      @recommended_books = []
-    end
+    @recommended_books = Current.user.recommended_books
+    @books = Book.where(featured: true)
   end
 
   # GET /books/1 or /books/1.json
@@ -18,62 +12,18 @@ class BooksController < ApplicationController
     @user_book = Current.user.user_books.find_or_initialize_by(book_id: @book.id)
   end
 
-  # GET /books/new
-  def new
-    @book = Book.new
-  end
-
-  # GET /books/1/edit
-  def edit
-  end
-
-  # POST /books or /books.json
-  def create
-    @book = Book.new(book_params)
-
+  def search
+    @results = BookSearchService.call(params[:query])
+    
     respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: "Book was successfully created." }
-        format.json { render :show, status: :created, location: @book }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /books/1 or /books/1.json
-  def update
-    respond_to do |format|
-      if @book.update(book_params)
-        format.html { redirect_to @book, notice: "Book was successfully updated." }
-        format.json { render :show, status: :ok, location: @book }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /books/1 or /books/1.json
-  def destroy
-    @book.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to books_path, status: :see_other, notice: "Book was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { render :search }
+      format.json { render json: @results }
     end
   end
 
   private
-
   # Use callbacks to share common setup or constraints between actions.
   def set_book
     @book = Book.find(params.expect(:id))
-  end
-
-  # Only allow a list of trusted parameters through.
-  def book_params
-    params.expect(book: [ :title, :author, :genre, :description, :user_book_count ])
   end
 end
