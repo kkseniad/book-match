@@ -1,0 +1,79 @@
+<div class="search-header">
+  <h1>Search Results for "<%= params[:query] %>"</h1>
+  <p class="results-count"><%= pluralize(@results.count, 'book') %> found</p>
+</div>
+
+<% if @results.any? %>
+  <div class="books-grid">
+    <% @results.each do |book_data| %>
+      <div class="book-detail-card search-result-card">
+        <div class="book-detail-content">
+          <!-- Left: Book Cover & Actions -->
+          <div class="book-cover-section">
+            <div class="book-cover-large">
+                <%= book_data[:title].upcase %>
+            </div>
+            
+            <div class="action-buttons">
+              <%= form_with model: UserBook.new, url: user_books_path, method: :post do |form| %>
+                <%= form.hidden_field :status, value: 'read' %>
+                
+                <%= fields_for :book do |book_fields| %>
+                  <%= book_fields.hidden_field :title, value: book_data[:title] %>
+                  <%= book_fields.hidden_field :author, value: book_data[:author] %>
+                  <%= book_fields.hidden_field :description, value: book_data[:description] %>
+                  <%= book_fields.hidden_field :source, value: book_data[:source] %>
+                  <%= book_fields.hidden_field :source_id, value: book_data[:source_id] %>
+                  <%= book_fields.hidden_field :isbn, value: book_data[:isbn] %>
+                  <%= book_fields.hidden_field :genre, value: book_data[:genre] %>
+                <% end %>
+                
+                <%= form.submit "I've Read", class: "btn-status" %>
+              <% end %>
+
+              <%= form_with model: UserBook.new, url: user_books_path, method: :post do |form| %>
+                <%= form.hidden_field :status, value: 'want_to_read' %>
+                
+                <%= fields_for :book do |book_fields| %>
+                  <%= book_fields.hidden_field :title, value: book_data[:title] %>
+                  <%= book_fields.hidden_field :author, value: book_data[:author] %>
+                  <%= book_fields.hidden_field :description, value: book_data[:description] %>
+                  <%= book_fields.hidden_field :source, value: book_data[:source] %>
+                  <%= book_fields.hidden_field :source_id, value: book_data[:source_id] %>
+                  <%= book_fields.hidden_field :isbn, value: book_data[:isbn] %>
+                  <%= book_fields.hidden_field :genre, value: book_data[:genre] %>
+                <% end %>
+                
+                <%= form.submit "Want to Read", class: "btn-status" %>
+              <% end %>
+            </div>
+          </div>
+          
+          <!-- Right: Book Info -->
+          <div class="book-info-section">
+            <div class="book-header">
+              <h2 class="book-title"><%= book_data[:title] %></h2>
+              <p class="book-author">by <%= book_data[:author] || "Unknown Author" %></p>
+              <% if book_data[:genre].present? %>
+                <span class="book-genre"><%= book_data[:genre] %></span>
+              <% end %>
+            </div>
+            
+            <% if book_data[:description].present? %>
+              <div class="book-description">
+                <strong>About this book:</strong><br>
+                <%= book_data[:description] %>
+              </div>
+            <% end %>
+            
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="no-results">
+    <p>No results found for "<%= params[:query] %>". Try a different search term.</p>
+    <%= link_to "← Back to Books", books_path, class: "btn-secondary" %>
+  </div>
+<% end %>
