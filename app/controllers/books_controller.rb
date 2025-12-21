@@ -13,11 +13,23 @@ class BooksController < ApplicationController
   end
 
   def search
-    @results = BookSearchService.call(params[:query])
+    if params[:query].present?
+      # search internal database
+      @internal_results = Book.where(
+        "title ILIKE ? OR author ILIKE ?", 
+        "%#{params[:query]}%", 
+        "%#{params[:query]}%"
+      )
+      
+      # If no internal results, search Open Library
+      if @internal_results.empty?
+        @external_results = BookSearchService.call(params[:query])
+      end
+    end
     
     respond_to do |format|
       format.html { render :search }
-      format.json { render json: @results }
+      format.json { render json: { internal: @search_results, external: @external_results } }
     end
   end
 
