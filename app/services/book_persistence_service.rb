@@ -12,6 +12,8 @@ class BookPersistenceService
   def persist
     ActiveRecord::Base.transaction do
       book = find_or_create_book
+      raise ActiveRecord::RecordInvalid.new(book) unless book.persisted?
+      
       user_book = create_or_update_user_book(book)
       { book: book, user_book: user_book }
     end
@@ -20,12 +22,12 @@ class BookPersistenceService
   private
 
   def find_or_create_book
-    Book.find_or_create_by(source: @book_data[:source], source_id: @book_data[:source_id]) do |book|
-      book.title = @book_data[:title]
-      book.author = @book_data[:author]
-      book.description = @book_data[:description]
-      book.genre = @book_data[:genre]
-      book.isbn = @book_data[:isbn]
+    book = Book.find_or_create_by(source: @book_data[:source], source_id: @book_data[:source_id]) do |b|
+      b.title = @book_data[:title]
+      b.author = @book_data[:author]
+      b.description = @book_data[:description].presence
+      b.genre = @book_data[:genre].presence
+      b.isbn = @book_data[:isbn].presence
     end
   end
 

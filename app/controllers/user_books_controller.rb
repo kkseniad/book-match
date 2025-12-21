@@ -21,39 +21,50 @@ class UserBooksController < ApplicationController
 
   # POST /user_books or /user_books/json
   def create
-    book_data = {
-      title: params[:book][:title],
-      author: params[:book][:author],
-      description: params[:book][:description],
-      source: params[:book][:source],
-      source_id: params[:book][:source_id],
-      isbn: params[:book][:isbn]
-    }
+    # Book already exists in DB
+    if params[:user_book][:book_id].present?
+      @user_book = Current.user.user_books.find_or_initialize_by(book_id: params[:user_book][:book_id])
+      @user_book.assign_attributes(user_book_params)
 
-    result = BookPersistenceService.call(
-      book_data,
-      Current.user,
-      user_book_params[:status]
-    )
+      respond_to do |format|
+        if @user_book.save
+          format.html { redirect_to @user_book.book, notice: "Book was successfully added to your library." }
+          format.json { render :show, status: :created, location: @user_book }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @user_book.errors, status: :unprocessable_entity }
+        end
+      end
 
-    @user_book = result[:user_book]
-
-    # Update rating if provided
-    if user_book_params[:rating].present?
-      @user_book.update(rating: user_book_params[:rating])
-    end
-
-    respond_to do |format|
-      format.html { redirect_to @user_book.book, notice: "Book was successfully added to your library." }
-      format.json { render :show, status: :created, location: @user_book }
-    end
-  rescue ActiveRecord::RecordInvalid => e
-    respond_to do |format|
-      format.html { 
-        @user_book ||= UserBook.new(user_book_params)
-        render :new, status: :unprocessable_entity 
+      # New book from search results (Open Library API)
+    elsif params[:book].present?
+      book_data = {
+        title: params[:book][:title],
+        author: params[:book][:author],
+        description: params[:book][:description],
+        source: params[:book][:source],
+        source_id: params[:book][:source_id],
+        isbn: params[:book][:isbn],
+        genre: params[:book][:genre],
       }
-      format.json { render json: { error: e.message }, status: :unprocessable_entity }
+
+      result = BookPersistenceService.call(
+        book_data,
+        Current.user,
+        user_book_params[:status]
+      )
+
+      @user_book = result[:user_book]
+
+      respond_to do |format|
+        format.html { redirect_to @user_book.book, notice: "Book was successfully added to your library." }
+        format.json { render :show, status: :created, location: @user_book }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_back fallback_location: books_path, alert: "Missing book information." }
+        format.json { render json: { error: "Missing book information" }, status: :unprocessable_entity }
+      end
     end
   end
 
