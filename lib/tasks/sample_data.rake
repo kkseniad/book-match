@@ -22,7 +22,7 @@ task({ sample_data: :environment }) do
   RATE = [ 1, 2, 3, 4, 5 ]
 
   all_users.each do |user|
-    num_books = rand(10..15)
+    num_books = rand(1..10)
     random_books = all_books.sample(num_books)
     random_books.each do |book|
       # Skip if already in library
