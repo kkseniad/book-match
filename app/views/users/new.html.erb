@@ -1,3 +1,13 @@
+<% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="auth-container">
   <div class="auth-card text-center">
     <%= link_to "BOOK MATCH", root_path, class: "logo-link" %>

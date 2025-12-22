@@ -33,7 +33,7 @@ class UserBooksController < ApplicationController
 
     respond_to do |format|
       if @user_book.save
-        format.html { redirect_to @user_book.book, notice: "User book was successfully created." }
+        format.html { redirect_to @user_book.book, notice: "Book was successfully added to your library." }
         format.json { render :show, status: :created, location: @user_book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class UserBooksController < ApplicationController
   def update
     respond_to do |format|
       if @user_book.update(user_book_params)
-        format.html { redirect_to user_library_path(Current.user.id), notice: "User book was successfully updated." }
+        format.html { redirect_to @user_book.book, notice: "Book was successfully updated." }
         format.json { render :show, status: :ok, location: @user_book }
       else
         format.html { render :edit, status: :unprocessable_entity }

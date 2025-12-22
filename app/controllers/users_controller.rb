@@ -3,6 +3,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.where({ :id => params.fetch(:id) }).at(0)
+    @read_books = @user.read_books.includes(:user_books)
+    @readers = @user.similar_readers.count
+    @want_to_read_books = @user.want_to_read_books.includes(:user_books)
+    @matching_books = @user.matching_books(Current.user)
   end
 
   def new
@@ -14,9 +18,9 @@ class UsersController < ApplicationController
 
     if @user.save
       start_new_session_for(@user)
-      redirect_to user_path(@user), notice: "Successfully created a new account"
+      redirect_to user_library_path(@user), notice: "Successfully created a new account"
     else
-      render :new, alert: "Unable to create a user"
+      render :new, status: :unprocessable_entity
     end
   end
 

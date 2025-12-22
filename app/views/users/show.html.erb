@@ -1,2 +1,35 @@
-<%# TODO: User#show %>
-<h1>User Page</h1>
+  
+<div class="page-header">
+  <h1><%= @user.name %>'s Profile</h1>
+  <p><%= @user.bio %></p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number" id="readCount"><%= @read_books.size %></div>
+      <div class="stat-label">Books Read</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" id="wantCount"><%= @want_to_read_books.size %></div>
+      <div class="stat-label">Want to Read</div>
+    </div>
+
+    <% if @user.id != Current.user.id %>
+      <div class="stat">
+        <div class="stat-number"><%= @matching_books.size %></div>
+        <div class="stat-label">Books in common</div>
+      </div>
+    <% else %>
+      <div class="stat">
+        <div class="stat-number"><%= @readers %></div>
+        <div class="stat-label">Readers Like You</div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render "library/shelves",
+           user: @user,
+           read_books: @read_books,
+           want_to_read_books: @want_to_read_books,
+           matching_books: @matching_books %>

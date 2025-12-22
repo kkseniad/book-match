@@ -1,0 +1,69 @@
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab active" data-tab="read">
+    Read
+  </button>
+
+  <button class="tab" data-tab="want-read">
+    Want to Read
+  </button>
+  
+  <% if Current.user.id != user.id %>
+  <button class="tab" data-tab="common-books">
+    Common Books
+  </button>
+  <% end %>
+</div>
+
+<!-- Tab Content: Read -->
+<div class="tab-content active" data-content="read">
+  <% if read_books.any? %>
+    <div class="books-grid">
+      <% read_books.each do |book| %>
+        <%= render "library/book", book: book, user: user %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <div class="empty-state-icon">📚</div>
+      <h3>No books read yet</h3>
+      <p>This shelf is empty.</p>
+    </div>
+  <% end %>
+</div>
+
+<!-- Tab Content: Want to Read -->
+<div class="tab-content" data-content="want-read">
+  <% if want_to_read_books.any? %>
+    <div class="books-grid">
+      <% want_to_read_books.each do |book| %>
+        <%= render "library/book", book: book, user: user %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <div class="empty-state-icon">📖</div>
+      <h3>No books yet</h3>
+      <p>This shelf is empty.</p>
+    </div>
+  <% end %>
+</div>
+
+<% if Current.user.id != user.id %>
+<!-- Tab Content: Common Books -->
+<div class="tab-content" data-content="common-books">
+  <% if matching_books.any? %>
+    <div class="books-grid">
+      <% matching_books.each do |book| %>
+        <%= render "library/book", book: book, user: user %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <div class="empty-state-icon">📖</div>
+      <h3>No books yet</h3>
+      <p>This shelf is empty.</p>
+    </div>
+  <% end %>
+</div>
+<% end %>

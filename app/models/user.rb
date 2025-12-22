@@ -27,6 +27,10 @@ class User < ApplicationRecord
   has_many :want_to_read_books, through: :want_to_read_user_books, source: :book
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+  normalizes :name, with: ->(n) { n.capitalize }
+
+  validates :password, confirmation: true
+
   # Helper method to check if user has book
   def has_book?(book)
     user_books.exists?(book_id: book.id)
