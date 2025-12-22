@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access(only: [ :new, :create ])
+  before_action :set_user
 
   def show
     @user = User.where({ :id => params.fetch(:id) }).at(0)
@@ -26,11 +27,11 @@ class UsersController < ApplicationController
 
 
   def edit
-    @user = User.where({ :id => params.fetch(:id) }).at(0)
+    authorize @user
   end
 
   def update
-    @user = User.where({ :id => params.fetch(:id) }).at(0)
+    authorize @user
     if @user.update(profile_params)
       redirect_to(user_path(@user), notice: "Updated user profile")
     else
@@ -43,6 +44,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def registration_params
     params.expect(user: [ :email_address, :name, :password, :password_confirmation ])
