@@ -1,0 +1,96 @@
+<% if @internal_results.present? && @internal_results.any? %>
+    <div class="page-header">
+      <h1>Readers Library</h1>
+      <p>Can’t find the book you’re looking for? Try searching by the full title or the author’s name.</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number"><%= @internal_results.count %></div>
+          <div class="stat-label">Books found for "<%= params[:query] %>"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="books-grid">
+      <% @internal_results.each do |book| %>
+        <%= render "library/book", book: book, user: Current.user %>
+      <% end %>
+    </div>
+
+<% elsif @external_results.present? && @external_results.any? %>
+  <div class="page-header">
+    <h1>Search Results</h1>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number"><%= @external_results.count %></div>
+        <div class="stat-label">Books found for "<%= params[:query] %>"</div>
+      </div>
+    </div>
+  </div>
+  <div class="books-grid">
+    <% @external_results.each do |book_data| %>
+      <div class="book-card-wrapper">
+        <div class="book-card">
+          <div class="book-cover">
+            <% if book_data[:cover_url] %>
+              <%= image_tag book_data[:cover_url], alt: book_data[:title], style: "width: 100%; height: 100%; object-fit: cover;" %>
+            <% else %>
+              <%= book_data[:title].upcase %>
+            <% end %>
+          </div>
+
+          <div class="book-info">
+            <div class="book-title"><%= book_data[:title] %></div>
+            <div class="book-author"><%= book_data[:author] || "Unknown Author" %></div>
+            
+            <% if book_data[:genre].present? %>
+              <div class="book-author" style="font-size: 0.75rem; margin-top: 0.25rem;">
+                <%= book_data[:genre] %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="book-actions-overlay">
+            <%= form_with model: UserBook.new, url: user_books_path, method: :post, class: "add-book-form" do |form| %>
+              <%= form.hidden_field :status, value: 'want_to_read' %>
+              
+              <%= fields_for :book do |book_fields| %>
+                <%= book_fields.hidden_field :title, value: book_data[:title] %>
+                <%= book_fields.hidden_field :author, value: book_data[:author] %>
+                <%= book_fields.hidden_field :description, value: book_data[:description] %>
+                <%= book_fields.hidden_field :source, value: book_data[:source] %>
+                <%= book_fields.hidden_field :source_id, value: book_data[:source_id] %>
+                <%= book_fields.hidden_field :isbn, value: book_data[:isbn] %>
+                <%= book_fields.hidden_field :genre, value: book_data[:genre] %>
+              <% end %>
+              
+              <%= form.submit "Want to Read", class: "btn-add-book" %>
+            <% end %>
+
+            <%= form_with model: UserBook.new, url: user_books_path, method: :post, class: "add-book-form" do |form| %>
+              <%= form.hidden_field :status, value: 'read' %>
+              
+              <%= fields_for :book do |book_fields| %>
+                <%= book_fields.hidden_field :title, value: book_data[:title] %>
+                <%= book_fields.hidden_field :author, value: book_data[:author] %>
+                <%= book_fields.hidden_field :description, value: book_data[:description] %>
+                <%= book_fields.hidden_field :source, value: book_data[:source] %>
+                <%= book_fields.hidden_field :source_id, value: book_data[:source_id] %>
+                <%= book_fields.hidden_field :isbn, value: book_data[:isbn] %>
+                <%= book_fields.hidden_field :genre, value: book_data[:genre] %>
+              <% end %>
+              
+              <%= form.submit "I've Read", class: "btn-add-book btn-read" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="empty-state">
+    <div class="empty-state-icon">🔍</div>
+    <h3>No results found</h3>
+    <p>No books found for "<%= params[:query] %>". Try a different search term.</p>
+    <%= link_to "← Back to Books", books_path, class: "btn-secondary" %>
+  </div>
+<% end %>

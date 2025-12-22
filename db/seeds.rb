@@ -8,68 +8,59 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-require "net/http"
-require "json"
-require "openssl"
+puts "🌱 Seeding featured books..."
 
-puts "🌱 Seeding books from Open Library..."
+featured_books = [
+  { title: "1984", author: "George Orwell", genre: "Classic" },
+  { title: "Animal Farm", author: "George Orwell", genre: "Classic" },
+  { title: "Pride and Prejudice", author: "Jane Austen", genre: "Classic" },
+  { title: "Jane Eyre", author: "Charlotte Brontë", genre: "Classic" },
+  { title: "To Kill a Mockingbird", author: "Harper Lee", genre: "Classic" },
+  { title: "The Great Gatsby", author: "F. Scott Fitzgerald", genre: "Classic" },
+  { title: "Little Women", author: "Louisa May Alcott", genre: "Classic" },
+  { title: "Moby-Dick", author: "Herman Melville", genre: "Classic" },
+  { title: "Crime and Punishment", author: "Fyodor Dostoevsky", genre: "Classic" },
+  { title: "The Catcher in the Rye", author: "J.D. Salinger", genre: "Classic" },
+  { title: "The Hobbit", author: "J.R.R. Tolkien", genre: "Fantasy" },
+  { title: "The Fellowship of the Ring", author: "J.R.R. Tolkien", genre: "Fantasy" },
+  { title: "Harry Potter and the Sorcerer’s Stone", author: "J.K. Rowling", genre: "Fantasy" },
+  { title: "Harry Potter and the Chamber of Secrets", author: "J.K. Rowling", genre: "Fantasy" },
+  { title: "A Game of Thrones", author: "George R.R. Martin", genre: "Fantasy" },
+  { title: "The Name of the Wind", author: "Patrick Rothfuss", genre: "Fantasy" },
+  { title: "The Lion, the Witch and the Wardrobe", author: "C.S. Lewis", genre: "Fantasy" },
+  { title: "Dune", author: "Frank Herbert", genre: "Sci-Fi" },
+  { title: "Ender’s Game", author: "Orson Scott Card", genre: "Sci-Fi" },
+  { title: "Fahrenheit 451", author: "Ray Bradbury", genre: "Sci-Fi" },
+  { title: "The Hitchhiker’s Guide to the Galaxy", author: "Douglas Adams", genre: "Sci-Fi" },
+  { title: "Brave New World", author: "Aldous Huxley", genre: "Sci-Fi" },
+  { title: "The Martian", author: "Andy Weir", genre: "Sci-Fi" },
+  { title: "The Girl with the Dragon Tattoo", author: "Stieg Larsson", genre: "Mystery" },
+  { title: "Gone Girl", author: "Gillian Flynn", genre: "Thriller" },
+  { title: "The Da Vinci Code", author: "Dan Brown", genre: "Thriller" },
+  { title: "The Silence of the Lambs", author: "Thomas Harris", genre: "Thriller" },
+  { title: "The Hound of the Baskervilles", author: "Arthur Conan Doyle", genre: "Mystery" },
+  { title: "Me Before You", author: "Jojo Moyes", genre: "Romance" },
+  { title: "The Notebook", author: "Nicholas Sparks", genre: "Romance" },
+  { title: "Outlander", author: "Diana Gabaldon", genre: "Romance" },
+  { title: "It Ends with Us", author: "Colleen Hoover", genre: "Romance" },
+  { title: "The Hunger Games", author: "Suzanne Collins", genre: "YA" },
+  { title: "Catching Fire", author: "Suzanne Collins", genre: "YA" },
+  { title: "Divergent", author: "Veronica Roth", genre: "YA" },
+  { title: "The Fault in Our Stars", author: "John Green", genre: "YA" },
+  { title: "Percy Jackson & the Lightning Thief", author: "Rick Riordan", genre: "YA" },
+  { title: "Sapiens", author: "Yuval Noah Harari", genre: "Non-fiction" },
+  { title: "Educated", author: "Tara Westover", genre: "Non-fiction" },
+  { title: "Atomic Habits", author: "James Clear", genre: "Non-fiction" },
+  { title: "Becoming", author: "Michelle Obama", genre: "Non-fiction" },
+  { title: "The Power of Habit", author: "Charles Duhigg", genre: "Non-fiction" }
+]
 
-Book.destroy_all
-
-BASE_URL = "https://openlibrary.org/search.json"
-
-genres = {
-  "Fantasy" => "fantasy",
-  "Romance" => "romance",
-  "Science Fiction" => "science fiction",
-  "Mystery" => "mystery",
-  "History" => "history"
-}
-
-BOOKS_PER_GENRE = 20
-
-def fetch_open_library(url)
-  uri = URI(url)
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-  request = Net::HTTP::Get.new(uri)
-  response = http.request(request)
-
-  JSON.parse(response.body)
+featured_books.each do |attrs|
+  book = Book.find_or_initialize_by(title: attrs[:title], author: attrs[:author])
+  book.genre = attrs[:genre]
+  book.featured = true
+  book.source = "manual"
+  book.save!
 end
 
-def fetch_work_description(work_key)
-  return nil unless work_key
-
-  data = fetch_open_library("https://openlibrary.org#{work_key}.json")
-  desc = data["description"]
-
-  desc.is_a?(Hash) ? desc["value"] : desc
-rescue
-  nil
-end
-
-genres.each do |genre_name, query|
-  puts "📚 Fetching #{genre_name} books..."
-
-  data = fetch_open_library(
-    "#{BASE_URL}?q=#{URI.encode_www_form_component(query)}&limit=#{BOOKS_PER_GENRE}"
-  )
-
-  data["docs"].each do |doc|
-    next if doc["title"].blank? || doc["author_name"].blank?
-
-    description = fetch_work_description(doc["key"])
-
-    Book.create!(
-      title: doc["title"],
-      author: doc["author_name"].first,
-      genre: genre_name,
-      description: description || "No description available."
-    )
-  end
-end
-
-puts "✅ Seeded #{Book.count} books successfully!"
+puts "✅ Seeded #{Book.where(featured: true).count} featured books"

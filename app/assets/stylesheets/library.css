@@ -69,7 +69,6 @@
   background: linear-gradient(135deg, #c17250 0%, #d4915e 100%);
 }
 
-/* Variety of book cover colors (warm palette) */
 /* Variety of book cover colors */
 .book-card-link:nth-child(6n+1) .book-cover {
   background: linear-gradient(135deg, #c17250 0%, #d4915e 100%); /* Your warm */

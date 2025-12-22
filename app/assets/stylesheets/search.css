@@ -1,0 +1,80 @@
+/* Apply the same nth-child color patterns to search results */
+.book-card-wrapper:nth-child(6n+1) .book-cover {
+  background: linear-gradient(135deg, #c17250 0%, #d4915e 100%);
+}
+
+.book-card-wrapper:nth-child(6n+2) .book-cover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.book-card-wrapper:nth-child(6n+3) .book-cover {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.book-card-wrapper:nth-child(6n+4) .book-cover {
+  background: linear-gradient(135deg, #e8b088 0%, #f5c99f 100%);
+}
+
+.book-card-wrapper:nth-child(6n+5) .book-cover {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.book-card-wrapper:nth-child(6n+6) .book-cover {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.book-card-wrapper .book-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.book-card-wrapper .book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(193, 114, 80, 0.2);
+}
+
+/* Keep the overlay styles from before */
+.book-actions-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.book-card:hover .book-actions-overlay {
+  opacity: 1;
+}
+
+.add-book-form {
+  margin: 0;
+}
+
+.btn-add-book {
+  width: 100%;
+  padding: 0.6rem;
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-add-book:hover {
+  background: #dcdada;
+  transform: translateY(-2px);
+}
