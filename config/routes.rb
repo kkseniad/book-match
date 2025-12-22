@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get "library", to: "library#index"
   end
   resources :user_books
-  resources :books, only: [:index, :show] do
+  resources :books, only: [ :index, :show ] do
     collection do
       get :search
     end

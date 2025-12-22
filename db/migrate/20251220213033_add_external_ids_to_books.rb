@@ -6,6 +6,6 @@ class AddExternalIdsToBooks < ActiveRecord::Migration[8.0]
     add_column :books, :featured, :boolean, default: false
 
     add_index :books, :isbn, unique: true
-    add_index :books, [:source, :source_id], unique: true
+    add_index :books, [ :source, :source_id ], unique: true
   end
 end

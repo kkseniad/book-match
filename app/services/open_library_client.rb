@@ -1,5 +1,5 @@
 class OpenLibraryClient
-  BASE_URL = 'https://openlibrary.org'
+  BASE_URL = "https://openlibrary.org"
 
   def self.search(query)
     new.search(query)
@@ -7,9 +7,8 @@ class OpenLibraryClient
 
   def search(query)
     response = HTTParty.get("#{BASE_URL}/search.json", query: { q: query, limit: 20 })
-    
     if response.success?
-      response['docs'] || []
+      response["docs"] || []
     else
       Rails.logger.error("OpenLibrary API error: #{response.code}")
       []

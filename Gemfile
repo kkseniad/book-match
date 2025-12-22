@@ -76,7 +76,7 @@ gem "rollbar"
 gem "simple_form"
 gem "strip_attributes"
 gem "validate_url"
-gem 'httparty'
+gem "httparty"
 
 group :development do
   gem "annotaterb"
