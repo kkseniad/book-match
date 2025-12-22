@@ -45,7 +45,7 @@ class UserBooksController < ApplicationController
         source: params[:book][:source],
         source_id: params[:book][:source_id],
         isbn: params[:book][:isbn],
-        genre: params[:book][:genre],
+        genre: params[:book][:genre]
       }
 
       result = BookPersistenceService.call(

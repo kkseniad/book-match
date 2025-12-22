@@ -13,7 +13,6 @@ class BookPersistenceService
     ActiveRecord::Base.transaction do
       book = find_or_create_book
       raise ActiveRecord::RecordInvalid.new(book) unless book.persisted?
-      
       user_book = create_or_update_user_book(book)
       { book: book, user_book: user_book }
     end
