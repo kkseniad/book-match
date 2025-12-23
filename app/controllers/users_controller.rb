@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access(only: [ :new, :create ])
-  before_action :set_user
+  before_action :set_user, except: [ :new, :create ]
 
   def show
     @user = User.where({ :id => params.fetch(:id) }).at(0)
