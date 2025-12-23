@@ -9,6 +9,12 @@ services:
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: book-match-db
+          property: connectionString
       - key: WEB_CONCURRENCY
         value: 2
+
+databases: 
+  - name: book-match-db
+    plan: free
