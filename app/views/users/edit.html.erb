@@ -1,3 +1,13 @@
+<% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="auth-container">
   <div class="auth-card text-center">
     <h1>Update Your Profile</h1>
