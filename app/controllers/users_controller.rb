@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access(only: [:new, :create])
-  before_action :set_user, except: [:new, :create]
+  allow_unauthenticated_access(only: [ :new, :create ])
+  before_action :set_user, except: [ :new, :create ]
 
   def show
     @read_books = @user.read_books.includes(:user_books)
