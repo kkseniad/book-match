@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access(only: [ :new, :create ])
-  before_action :set_user, except: [ :new, :create ]
+  allow_unauthenticated_access(only: [:new, :create])
+  before_action :set_user, except: [:new, :create]
 
   def show
-    @user = User.where({ :id => params.fetch(:id) }).at(0)
     @read_books = @user.read_books.includes(:user_books)
     @readers = @user.similar_readers.count
     @want_to_read_books = @user.want_to_read_books.includes(:user_books)
@@ -25,7 +24,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   def edit
     authorize @user
   end
@@ -35,7 +33,7 @@ class UsersController < ApplicationController
     if @user.update(profile_params)
       redirect_to(user_path(@user), notice: "Updated user profile")
     else
-      render :edit, alert: "Something went wrong when saving"
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -54,6 +52,12 @@ class UsersController < ApplicationController
   end
 
   def profile_params
-    params.expect(user: [ :name, :bio, :email_address, :password, :password_confirmation ])
+    permitted = [ :name, :bio ]
+
+    if params[:user][:password].present?
+      permitted += [ :password, :password_confirmation ]
+    end
+
+    params.expect(user: permitted)
   end
 end
