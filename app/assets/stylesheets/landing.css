@@ -1,6 +1,4 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -78,7 +76,6 @@ nav {
 /* Hero Section */
 .hero {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 4rem 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -121,6 +118,7 @@ nav {
   background: white;
   padding: 5rem 2rem;
   text-align: center;
+  margin-bottom: 4rem;
 }
 
 .how-it-works h2 {
@@ -171,6 +169,7 @@ nav {
   padding: 5rem 2rem;
   text-align: center;
   color: white;
+  margin: auto;
 }
 
 .cta h2 {
