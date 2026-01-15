@@ -77,6 +77,7 @@ gem "simple_form"
 gem "strip_attributes"
 gem "validate_url"
 gem "httparty"
+gem "meta-tags"
 
 group :development do
   gem "annotaterb"

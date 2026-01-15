@@ -1,0 +1,18 @@
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+<%=
+  display_meta_tags({
+    site: "Book Match",
+    image: asset_url('meta-image.png'),
+    description: "Discover your next favorite book from readers who share your taste. Get personalized book recommendations based on proven reading compatibility, not random reviews.",
+    og: {
+      title: "Book Match - Find Books You'll Actually Love",
+      image: asset_url('meta-image.png'),
+      description: "Discover your next favorite book from readers who share your taste. Get personalized book recommendations based on proven reading compatibility, not random reviews.",
+      site_name: "Book Match"
+    },
+  })
+%>
