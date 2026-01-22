@@ -51,11 +51,28 @@ class User < ApplicationRecord
       .distinct
   end
 
+  # Helper method to find readers with 5 books in common
+  def bookmates
+    User
+      .joins(:books)
+      .where(books: { id: books.select(:id) })
+      .where.not(id: id)
+      .group("users.id")
+      .having("COUNT(books.id) >= 5")
+  end
+
+
+  # Helper method to count similar readers
+  def readers_count
+    readers = bookmates.exists? ? bookmates : similar_readers
+    readers.group_values.any? ? readers.count.keys.size : readers.count
+  end
+
   # Helper method to retrieve books from similar readers libraries
   def recommended_books
     Book
       .joins(:readers)
-      .where(readers: { id: similar_readers })
+      .where(readers: { id: bookmates })
       .where.not(id: books)
       .distinct
   end
