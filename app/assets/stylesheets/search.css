@@ -1,4 +1,3 @@
-/* Apply the same nth-child color patterns to search results */
 .book-card-wrapper:nth-child(6n+1) .book-cover {
   background: linear-gradient(135deg, #c17250 0%, #d4915e 100%);
 }
@@ -38,7 +37,6 @@
   box-shadow: 0 8px 24px rgba(193, 114, 80, 0.2);
 }
 
-/* Keep the overlay styles from before */
 .book-actions-overlay {
   position: absolute;
   bottom: 0;
