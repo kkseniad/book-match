@@ -4,9 +4,10 @@ class UsersController < ApplicationController
 
   def show
     @read_books = @user.read_books.includes(:user_books)
-    @readers = @user.similar_readers.count
+    @readers = @user.bookmates.exists? ? @user.bookmates : @user.similar_readers
     @want_to_read_books = @user.want_to_read_books.includes(:user_books)
     @matching_books = @user.matching_books(Current.user)
+    @readers_count = @user.readers_count
   end
 
   def new
