@@ -1,29 +1,5 @@
 /* Discover Page */
 
-/* Recommendation Badge */
-.recommendation-badge {
-  background: var(--warm-light);
-  color: var(--warm-primary);
-  padding: 0.35rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-top: 0.5rem;
-  display: inline-block;
-}
-
-/* Genre Tag */
-.genre-tag {
-  background: var(--warm-light);
-  color: var(--warm-primary);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-top: 0.5rem;
-  display: inline-block;
-}
-
 /* Empty State */
 .empty-state {
   text-align: center;
