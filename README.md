@@ -1,36 +1,37 @@
 # Book Match
 
+## Description
 **Stop wasting time on books you won't like - get recommendations from readers who've already proven they have your taste.**
 A web application that helps book lovers discover their next great read through personalized recommendations from readers with similar taste.
 
-## The Problem
-Book readers struggle to find their next book because they can't trust recommendations from strangers. Reviews on platforms like Goodreads or Amazon come from people with completely different reading preferences - a romance reader's 5-star review doesn't help a sci-fi enthusiast. This leads to wasted time browsing, disappointing book choices, or endlessly re-reading familiar favorites.
-## The Solution
-Book Match uses a taste-matching algorithm to connect you with readers who share your reading history. If someone has read 8+ of the same books you have, their recommendations are likely to match your taste. No more guessing - just personalized book suggestions from people who read like you.
+## Installation
+1. Clone the repository:
+`git clone https://github.com/kkseniad/book-match.git`
 
-## Key Features
-✨ Personal Reading Library
+2. Navigate to the project directory:
+`cd book-match`
 
-* Add books and mark them as "Read" or "Want to Read"
-* Rate books 1-5 stars to refine your profile
-* Track your complete reading history
+3. Install the required gems:
+`bundle install`
 
-🎯 Taste Match Algorithm
+4. Set up the database:
+`rails db:setup`
 
-* Discover readers who share 8+ books with you
-* See which specific books you have in common
-* View their ratings and recommendations
+5. Start the Rails server:
+`rails bin/server`
 
-📖 Personalized Discovery
+## Usage
 
-* Browse "What to Read Next" recommendations from similar readers
-* Filter by genre and sort by most recommended
-* View detailed book pages with ratings from readers like you
+1. Start the Rails server:
+`rails bin/server`
 
-👤 Reader Profiles
+2. Open your browser and navigate to http://localhost:3000
+Follow the on-screen instructions to use the application
 
-* View other users' reading libraries
-* See your "taste match score" with any reader
-* Understand compatibility through shared books
+## Contact
+
+Kseniia Kormalova - [kormalovak@gmail.com](mailto:kormalovak@gmail.com)
+
+Project Link: [https://github.com/kkseniad/book-match](https://github.com/kkseniad/book-match)
 
 All files are covered by the MIT license, see [LICENSE.txt](LICENSE.txt).

@@ -26,7 +26,7 @@ Build your reading profile by adding books, marking them as "Read" or "Want to R
 * **Taste Match Algorithm**
 See book recommendations from readers who share 5+ books with you, with their ratings and the specific books you have in common.
 * **Book Discovery**
-Browse personalized "What to Read Next" recommendations and individual book pages highlighting ratings from readers with similar taste.
+Browse personalized "For you" recommendations and individual book pages highlighting ratings from readers with similar taste.
 * **User Profiles**
 View other readers' libraries and see your "taste match score" (number of books in common) to understand compatibility.
 
@@ -34,10 +34,10 @@ View other readers' libraries and see your "taste match score" (number of books 
 ## User Stories
 - As a user, I want to add books to my library and mark them as "Read" or "Want to Read" so I can build my reading profile.
 - As a user, I want to rate books I've read (1-5 stars) so I can remember how much I enjoyed them.
-- As a user, I want to see book recommendations from readers who share 8+ books with me so I can trust their suggestions.
+- As a user, I want to see book recommendations from readers who share 5+ books with me so I can trust their suggestions.
 - As a user, I want to view which books I have in common with another reader so I understand why their taste matches mine.
-- As a user, I want to browse a "What to Read Next" page so I can quickly find my next book based on similar readers' recommendations.
-- As a user, I want to view detailed book information (title, author, description, ratings) so I can decide if I want to read it.
+- As a user, I want to browse a "Discover" page so I can quickly find my next book based on similar readers' recommendations.
+- As a user, I want to view detailed book information (title, author, ratings) so I can decide if I want to read it.
 - As a user, I want to see how many readers with similar taste recommend a book so I can gauge if it's right for me.
 
 ## Domain Model
