@@ -24,6 +24,10 @@
   font-weight: 600;
 }
 
+.clickable-stat {
+  cursor: pointer;
+}
+
 /* Books Grid */
 .books-grid {
   display: grid;

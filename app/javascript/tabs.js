@@ -1,31 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".tabs").forEach(tabsContainer => {
-    const container = tabsContainer.parentElement;
-    const tabs = tabsContainer.querySelectorAll(".tab");
-    const contents = container.querySelectorAll(".tab-content");
+  const tabs = document.querySelectorAll(".tab");
+  const contents = document.querySelectorAll(".tab-content");
 
+  function activateTab(tabName) {
     tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        const name = tab.dataset.tab;
+      tab.classList.toggle("active", tab.dataset.tab === tabName);
+    });
 
-        // Deactivate tabs
-        tabs.forEach(t => t.classList.remove("active"));
+    contents.forEach(content => {
+      content.classList.toggle(
+        "active",
+        content.dataset.content === tabName
+      );
+    });
+  }
 
-        // Hide all content in THIS container only
-        contents.forEach(c => c.classList.remove("active"));
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      activateTab(tab.dataset.tab);
+    });
+  });
 
-        // Activate clicked tab
-        tab.classList.add("active");
-
-        // Show matching content
-        const activeContent = container.querySelector(
-          `.tab-content[data-content="${name}"]`
-        );
-
-        if (activeContent) {
-          activeContent.classList.add("active");
-        }
-      });
+  document.querySelectorAll(".clickable-stat").forEach(stat => {
+    stat.addEventListener("click", () => {
+      activateTab(stat.dataset.tabTarget);
     });
   });
 });

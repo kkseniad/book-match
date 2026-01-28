@@ -1,0 +1,16 @@
+<!-- Modal -->
+<div class="modal fade" id="readers" tabindex="-1" aria-labelledby="readersLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="readersLabel">Readers</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body list-group list-group-flush">
+          <% readers.each do |reader| %>
+            <%= link_to reader.name, user_path(reader.id), class: "list-group-item list-group-item-action" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
