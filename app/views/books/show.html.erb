@@ -24,6 +24,13 @@
           <%= form.hidden_field :status, value: 'want_to_read' %>
           <%= form.submit "Want to Read", class: "btn-status #{'active' if @user_book.status == 'want_to_read'}" %>
         <% end %>
+
+        <!-- Delete Button -->
+        <% if @user_book.persisted? %>
+          <%= button_to user_book_path(@user_book), method: :delete, class: "btn-status" do %>
+                Remove from Library
+          <% end %>
+        <% end %>
       </div>
     </div>
     
