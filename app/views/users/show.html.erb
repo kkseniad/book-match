@@ -1,27 +1,40 @@
-  
 <div class="page-header">
   <h1><%= @user.name %>'s Profile</h1>
   <p><%= @user.bio %></p>
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-number" id="readCount"><%= @read_books.size %></div>
+      <div class="stat-number clickable-stat" data-tab-target="read">
+        <%= @read_books.size %>
+      </div>
       <div class="stat-label">Books Read</div>
     </div>
 
     <div class="stat">
-      <div class="stat-number" id="wantCount"><%= @want_to_read_books.size %></div>
+      <div class="stat-number clickable-stat" data-tab-target="want-read">
+        <%= @want_to_read_books.size %>
+      </div>
       <div class="stat-label">Want to Read</div>
     </div>
 
     <% if @user.id != Current.user.id %>
       <div class="stat">
-        <div class="stat-number"><%= @matching_books.size %></div>
+        <div class="stat-number clickable-stat" data-tab-target="common-books">
+          <%= @matching_books.size %>
+        </div>
         <div class="stat-label">Books in common</div>
       </div>
     <% else %>
       <div class="stat">
-        <div class="stat-number"><%= @readers_count %></div>
+        <div>
+          <%= link_to "#", class: "link-underline link-underline-opacity-0 stat-number", 
+          data: { 
+            "bs-toggle": "modal", 
+            "bs-target": "#readers"
+          } do %>
+            <%= @readers_count %>
+          <% end %>
+        </div>
         <div class="stat-label">Readers Like You</div>
       </div>
     <% end %>
@@ -33,3 +46,11 @@
            read_books: @read_books,
            want_to_read_books: @want_to_read_books,
            matching_books: @matching_books %>
+
+<!-- Modal -->
+<%=
+  render "users/readers_modal",
+    user: @user,
+    readers: @readers,
+    target: "#readers"
+%>

@@ -86,7 +86,7 @@ class UserBooksController < ApplicationController
     @user_book.destroy!
 
     respond_to do |format|
-      format.html { redirect_to user_books_path, status: :see_other, notice: "Book was successfully removed from your library." }
+      format.html { redirect_to user_library_path(Current), status: :see_other, notice: "Book was successfully removed from your library." }
       format.json { head :no_content }
     end
   end

@@ -1,3 +1,9 @@
+<div class="mx-auto pb-2 stat-label" style="max-width: 1000px;">
+  <%= link_to :back, class: "link-body-emphasis link-underline link-underline-opacity-0" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+    Go back
+  <% end %>
+</div>
 <div class="book-detail-card">
   <div class="book-detail-content">
     <!-- Left: Book Cover & Actions -->
@@ -17,6 +23,13 @@
           <%= form.hidden_field :book_id, value: @book.id %>
           <%= form.hidden_field :status, value: 'want_to_read' %>
           <%= form.submit "Want to Read", class: "btn-status #{'active' if @user_book.status == 'want_to_read'}" %>
+        <% end %>
+
+        <!-- Delete Button -->
+        <% if @user_book.persisted? %>
+          <%= button_to user_book_path(@user_book), method: :delete, class: "btn-status" do %>
+                Remove from Library
+          <% end %>
         <% end %>
       </div>
     </div>

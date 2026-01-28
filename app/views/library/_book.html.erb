@@ -9,6 +9,9 @@
     <div class="book-info">
       <div class="book-title"><%= book.title %></div>
       <div class="book-author"><%= book.author %></div>
+      <% if book.genre.present? %>
+        <span class="genre-tag"><%= book.genre %></span>
+      <% end %>
 
       <% if user_book&.rating.present? %>
         <div class="book-rating">

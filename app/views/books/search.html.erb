@@ -1,7 +1,15 @@
+<div class="stat-label pb-2">
+  <%= link_to :back, class: "link-body-emphasis link-underline link-underline-opacity-0" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+    Go back
+  <% end %>
+</div>
+
 <% if @internal_results.present? && @internal_results.any? %>
     <div class="page-header">
       <h1>Readers Library</h1>
       <p>Can’t find the book you’re looking for? Try searching by the full title or the author’s name.</p>
+
       <div class="stats">
         <div class="stat">
           <div class="stat-number"><%= @internal_results.count %></div>
@@ -19,6 +27,7 @@
 <% elsif @external_results.present? && @external_results.any? %>
   <div class="page-header">
     <h1>Search Results</h1>
+    <p>Can’t find the book you’re looking for? Try searching by the full title or the author’s name.</p>
     <div class="stats">
       <div class="stat">
         <div class="stat-number"><%= @external_results.count %></div>

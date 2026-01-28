@@ -72,7 +72,7 @@ class User < ApplicationRecord
   def recommended_books
     Book
       .joins(:readers)
-      .where(readers: { id: bookmates })
+      .where(readers: { id: similar_readers })
       .where.not(id: books)
       .distinct
   end

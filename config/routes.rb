@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users do
     get "library", to: "library#index"
   end
-  resources :user_books, only: [ :create, :update ]
+  resources :user_books, only: [ :create, :update, :destroy ]
   resources :books, only: [ :index, :show ] do
     collection do
       get :search
