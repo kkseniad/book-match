@@ -86,6 +86,7 @@ group :development do
   gem "dev_toolbar", "~> 2.1.0"
   gem "draft_generators", github: "firstdraft/draft_generators", branch: "bp-summer-2025-update"
   gem "haikunator"
+  gem "letter_opener"
   gem "pry-rails"
   gem "rails_db", "~> 2.5.0"
   gem "rails-erd"
