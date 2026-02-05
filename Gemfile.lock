@@ -287,6 +287,8 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailtrap (2.6.0)
+      base64
     marcel (1.0.4)
     matrix (0.4.2)
     meta-tags (2.22.3)
@@ -635,6 +637,7 @@ DEPENDENCIES
   kamal
   kaminari
   letter_opener
+  mailtrap (~> 2.6)
   meta-tags
   pagy
   pg (~> 1.1)
