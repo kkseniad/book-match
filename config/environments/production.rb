@@ -58,7 +58,7 @@ Rails.application.configure do
 
   # Mailtrap
   config.action_mailer.delivery_method = :mailtrap
-  config.action_mailer.mailtrap_settings = {
+  config.action_mailer.smtp_settings = {
     api_key: Rails.application.credentials.mailtrap_api_key
   }
 
