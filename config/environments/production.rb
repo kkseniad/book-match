@@ -59,7 +59,7 @@ Rails.application.configure do
   # Mailtrap
   config.action_mailer.delivery_method = :mailtrap
   config.action_mailer.smtp_settings = {
-    api_key: Rails.application.credentials.mailtrap_api_key
+    api_key: Rails.application.credentials.fetch(:mailtrap_api_key)
   }
 
   # Set host to be used by links generated in mailer templates.
