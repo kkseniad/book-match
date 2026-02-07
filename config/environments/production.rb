@@ -59,20 +59,22 @@ Rails.application.configure do
   # Mailtrap
   config.action_mailer.delivery_method = :mailtrap
   config.action_mailer.mailtrap_settings = {
-    api_key: Rails.application.credentials.dig(:mailtrap, :api_key)
+    api_key: Rails.application.credentials.dig(:mailtrap, :api_key),
   }
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "bookmatch.site" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
-  # config.action_mailer.smtp_settings = {
-  #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
-  #   password: Rails.application.credentials.dig(:smtp, :password),
-  #   address: "smtp.example.com",
-  #   port: 587,
-  #   authentication: :plain
-  # }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: "api",
+    password: Rails.application.credentials.dig(:mailtrap, :api_key),
+    address: "live.smtp.mailtrap.io",
+    host: "live.smtp.mailtrap.io",
+    port: "587",
+    authentication: :login,
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
