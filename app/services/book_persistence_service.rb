@@ -21,13 +21,16 @@ class BookPersistenceService
   private
 
   def find_or_create_book
-    book = Book.find_or_create_by(source: @book_data[:source], source_id: @book_data[:source_id]) do |b|
-      b.title = @book_data[:title]
-      b.author = @book_data[:author]
-      b.description = @book_data[:description].presence
-      b.genre = @book_data[:genre].presence
-      b.isbn = @book_data[:isbn].presence
-    end
+    book = Book.find_or_initialize_by(
+      source: @book_data[:source],
+      source_id: @book_data[:source_id],
+    )
+
+    return book if book.persisted?
+
+    enrich_book(book)
+    book.save!
+    book
   end
 
   def create_or_update_user_book(book)
@@ -35,5 +38,37 @@ class BookPersistenceService
     user_book.status = @status
     user_book.save!
     user_book
+  end
+
+  def enrich_book(book)
+    work_details = OpenLibraryClient.fetch_work(book.source_id)
+
+    book.title = @book_data[:title]
+    book.author = @book_data[:author]
+    book.genre = extract_genre(work_details)
+    book.description = extract_description(work_details)
+  end
+
+  def extract_description(work_details)
+    desc = work_details["description"]
+
+    case desc
+    when String
+      desc
+    when Hash
+      desc["value"]
+    else
+      nil
+    end
+  end
+
+  def extract_genre(work_details)
+    subjects = work_details["subjects"].map(&:downcase)
+    
+    Book::GENRES.each do |genre|
+      return genre if subjects.include?(genre)
+    end
+
+    "other"
   end
 end

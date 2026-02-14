@@ -7,7 +7,6 @@
 #  description      :text
 #  featured         :boolean          default(FALSE)
 #  genre            :string
-#  isbn             :string
 #  source           :string
 #  title            :string
 #  user_books_count :integer          default(0), not null
@@ -17,7 +16,6 @@
 #
 # Indexes
 #
-#  index_books_on_isbn                  (isbn) UNIQUE
 #  index_books_on_source_and_source_id  (source,source_id) UNIQUE
 #
 class Book < ApplicationRecord
@@ -25,5 +23,25 @@ class Book < ApplicationRecord
   has_many :readers, through: :user_books, source: :reader
 
   validates :title, presence: true
-  validates :isbn, uniqueness: true, allow_nil: true
+
+  GENRES = [
+    "fiction",
+    "fantasy",
+    "science fiction",
+    "romance",
+    "mystery",
+    "thriller",
+    "horror",
+    "historical",
+    "biography",
+    "self-help",
+    "philosophy",
+    "psychology",
+    "business",
+    "children",
+    "young adult",
+    "classic",
+    "sci-fi",
+    "non-fiction" 
+  ]
 end
