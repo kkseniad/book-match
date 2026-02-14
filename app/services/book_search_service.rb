@@ -20,14 +20,14 @@ class BookSearchService
 
   def normalize_results(results)
     results.map do |book_data|
+      work_id = extract_source_id(book_data["key"])
       {
         source: "open_library",
         source_id: extract_source_id(book_data["key"]),
         title: book_data["title"],
         author: book_data["author_name"]&.first,
-        description: book_data["first_sentence"]&.join(" "),
-        genre: book_data["subject"]&.first,
-        isbn: book_data["isbn"]&.first
+        description: nil,
+        genre: nil
       }
     end
   end
@@ -35,4 +35,5 @@ class BookSearchService
   def extract_source_id(key)
     key&.split("/")&.last
   end
+
 end
