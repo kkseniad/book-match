@@ -44,7 +44,6 @@ class UserBooksController < ApplicationController
         description: params[:book][:description],
         source: params[:book][:source],
         source_id: params[:book][:source_id],
-        isbn: params[:book][:isbn],
         genre: params[:book][:genre]
       }
 
