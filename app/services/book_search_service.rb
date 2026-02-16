@@ -35,5 +35,4 @@ class BookSearchService
   def extract_source_id(key)
     key&.split("/")&.last
   end
-
 end
