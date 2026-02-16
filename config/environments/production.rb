@@ -34,7 +34,7 @@ Rails.application.configure do
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
   # Log to STDOUT with the current request id as a default log tag.
-  config.log_tags = [:request_id]
+  config.log_tags = [ :request_id ]
   config.logger = ActiveSupport::TaggedLogging.logger(STDOUT)
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!)
@@ -59,7 +59,7 @@ Rails.application.configure do
   # Mailtrap
   config.action_mailer.delivery_method = :mailtrap
   config.action_mailer.mailtrap_settings = {
-    api_key: Rails.application.credentials.dig(:mailtrap, :api_key),
+    api_key: Rails.application.credentials.dig(:mailtrap, :api_key)
   }
 
   # Set host to be used by links generated in mailer templates.
@@ -73,7 +73,7 @@ Rails.application.configure do
     address: "live.smtp.mailtrap.io",
     host: "live.smtp.mailtrap.io",
     port: "587",
-    authentication: :login,
+    authentication: :login
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -84,7 +84,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Only use :id for inspections in production.
-  config.active_record.attributes_for_inspect = [:id]
+  config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [

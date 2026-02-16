@@ -45,11 +45,11 @@ class BookPersistenceService
 
     book.title = @book_data[:title]
     book.author = @book_data[:author]
-    book.genre = extract_genre(work_details)
-    book.description = extract_description(work_details)
+    book.genre = self.class.extract_genre(work_details)
+    book.description = self.class.extract_description(work_details)
   end
 
-  def extract_description(work_details)
+  def self.extract_description(work_details)
     desc = work_details["description"]
 
     case desc
@@ -62,9 +62,8 @@ class BookPersistenceService
     end
   end
 
-  def extract_genre(work_details)
+  def self.extract_genre(work_details)
     subjects = work_details["subjects"].map(&:downcase)
-    
     Book::GENRES.each do |genre|
       return genre if subjects.include?(genre)
     end

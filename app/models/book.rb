@@ -42,6 +42,6 @@ class Book < ApplicationRecord
     "young adult",
     "classic",
     "sci-fi",
-    "non-fiction" 
+    "non-fiction"
   ]
 end
