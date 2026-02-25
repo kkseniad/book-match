@@ -58,24 +58,9 @@ end
 
 # Additional gems for AppDev
 gem "active_link_to"
-gem "ai-chat"
 gem "appdev_support"
-gem "awesome_print"
-gem "devise"
-gem "dotenv"
-gem "carrierwave"
-gem "cloudinary"
-gem "faker"
-gem "htmlbeautifier"
 gem "http"
-gem "kaminari"
-gem "pagy"
 gem "pundit"
-gem "ransack"
-gem "rollbar"
-gem "simple_form"
-gem "strip_attributes"
-gem "validate_url"
 gem "httparty"
 gem "mailtrap", "~> 2.6"
 gem "meta-tags"
@@ -94,16 +79,15 @@ group :development do
   gem "rufo"
 end
 
-group :development, :test do
-  gem "rspec-rails", "~> 7.1.1"
-  gem "grade_runner", "~> 0.0.13"
-end
+# group :development, :test do
+#   gem "rspec-rails", "~> 7.1.1"
+# end
 
-group :test do
-  gem "shoulda-matchers", "~> 6.4"
-  gem "rspec-html-matchers"
-  gem "rails-controller-testing"
-  gem "webmock"
-  gem "capybara"
-  gem "selenium-webdriver", "~> 4.11.0"
-end
+# group :test do
+#   gem "shoulda-matchers", "~> 6.4"
+#   gem "rspec-html-matchers"
+#   gem "rails-controller-testing"
+#   gem "webmock"
+#   gem "capybara"
+#   gem "selenium-webdriver", "~> 4.11.0"
+# end
