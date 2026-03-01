@@ -90,7 +90,7 @@ nav {
   color: #3d2817;
 }
 
-.hero-content .highlight {
+.highlight {
   color: #c17250;
   position: relative;
 }
@@ -201,6 +201,41 @@ footer {
   padding: 2rem;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Video Frame */
+.demo {
+  padding: 4rem 0;
+  background: #faf8f5;
+  margin-bottom: 4rem;
+}
+
+.demo-content h1 {
+  font-size: 2.75rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #3d2817;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.demo-content p {
+  font-size: 1.25rem;
+  color: #6b5548;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.video-wrapper {
+  position: relative;
+}
+
+.video-frame {
+  position: relative;
+  padding: 1rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
 }
 
 /* Responsive */
