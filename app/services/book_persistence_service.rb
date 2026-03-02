@@ -63,9 +63,9 @@ class BookPersistenceService
   end
 
   def self.extract_genre(work_details)
-    subjects = work_details["subjects"].map(&:downcase)
+    subjects = Array(work_details["subjects"])
     Book::GENRES.each do |genre|
-      return genre if subjects.include?(genre)
+      return genre if subjects.any? { |s| s.include?(genre) }
     end
 
     "other"
