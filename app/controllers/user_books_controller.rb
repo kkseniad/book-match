@@ -36,7 +36,7 @@ class UserBooksController < ApplicationController
         end
       end
 
-      # New book from search results (Open Library API)
+    # New book from search results (Open Library API)
     elsif params[:book].present?
       book_data = {
         title: params[:book][:title],
