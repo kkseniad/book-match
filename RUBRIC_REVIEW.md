@@ -5,7 +5,7 @@
 - Project Name: Book Match
 - Reviewer Name: Claude Code
 - Repository URL: https://github.com/kkseniad/book-match
-- Feedback Pull Request URL: (see ih-code-review branch)
+- Feedback Pull Request URL: https://github.com/kkseniad/book-match/pull/38
 
 ---
 
