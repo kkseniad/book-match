@@ -3,7 +3,7 @@
 - Date/Time: 2026-03-03
 - Trainee Name: Kseniia Kormalova
 - Project Name: Book Match
-- Reviewer Name: Claude Code
+- Reviewer Name: Claude Code, Ian Heraty, Adolfo Nava
 - Repository URL: https://github.com/kkseniad/book-match
 - Feedback Pull Request URL: https://github.com/kkseniad/book-match/pull/38
 
